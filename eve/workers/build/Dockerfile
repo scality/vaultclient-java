@@ -10,7 +10,8 @@ RUN apt-get update && apt-get install -y \
     openjdk-8-jdk \
     python3-buildbot-worker \
     curl \
-    unzip
+    unzip \
+    git
 
 RUN curl -o gradle-${GRADLE_VERSION}-bin.zip https://downloads.gradle-dn.com/distributions/gradle-${GRADLE_VERSION}-bin.zip && \
     mkdir /opt/gradle && \

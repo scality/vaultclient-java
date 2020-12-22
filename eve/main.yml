@@ -8,13 +8,6 @@ branches:
 stages:
   pre-merge:
     worker:
-      type: local
-    steps:
-    - TriggerStages:
-        stage_names:
-        - gradle-build
-  gradle-build:
-    worker:
       type: kube_pod
       path: eve/workers/pod.yaml
       images:
