@@ -20,6 +20,7 @@ jacocoTestReport {
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
+                    "**/dto/*.*"
             ])
         }))
     }
@@ -30,13 +31,14 @@ jacocoTestCoverageVerification {
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
+                    "**/dto/*.*"
             ])
         }))
     }
     violationRules {
         rule {
             limit {
-                minimum = 0.5 // verifying mandatory code coverage of 50%
+                minimum = 0.8 // verifying mandatory code coverage of 50%
             }
         }
         rule {

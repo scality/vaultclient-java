@@ -2,6 +2,9 @@ buildscript {
     repositories {
         jcenter()
     }
+    dependencies {
+        classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
+    }
 }
 
 plugins {
@@ -30,6 +33,7 @@ allprojects {
     apply from: "$rootDir/pmd.gradle"
     apply from: "$rootDir/jacoco.gradle"
 
+    apply plugin: 'com.bmuschko.nexus'
 
     repositories {
         mavenLocal()

@@ -16,9 +16,10 @@ pmdTest {
 
 pmd {
     consoleOutput = true
-    toolVersion = "6.21.0"
-    rulePriority = 5
+    toolVersion = "6.30.0"
+    rulePriority = 4
     ignoreFailures = false
     reportsDir = file("$buildDir/reports/pmd")
-//        ruleSets = ["category/java/errorprone.xml", "category/java/bestpractices.xml"]
+//    ruleSetFiles = files("$rootDir/pmd-rules.xml")
+//    ruleSets = ["category/java/bestpractices.xml"]
 }
