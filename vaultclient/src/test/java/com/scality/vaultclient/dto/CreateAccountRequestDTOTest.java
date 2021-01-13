@@ -1,6 +1,5 @@
-package com.scality.vaultclient;
+package com.scality.vaultclient.dto;
 
-import com.scality.vaultclient.dto.CreateAccountRequestDTO;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,6 +31,7 @@ public class CreateAccountRequestDTOTest {
         assertEquals(name, createAccountRequestDTO.getName(), "Invalid Name");
         assertEquals(10, createAccountRequestDTO.getQuotaMax(), "Invalid quota" );
         assertEquals(DEFAULT_ACCOUNT_ID, createAccountRequestDTO.getExternalAccountId(), "Invalid ExternalAccountId");
+        assertNotNull(createAccountRequestDTO.toString());
     }
 
     @Test
@@ -56,11 +56,11 @@ public class CreateAccountRequestDTOTest {
         String name = DEFAULT_ACCOUNT_NAME;
 
         assertThrows(NullPointerException.class, () -> {
-            CreateAccountRequestDTO.builder()
-                    .emailAddress(email_address)
-                    .name(name)
-                    .quotaMax(10)
-                    .build();
+            CreateAccountRequestDTO requestDTO = new CreateAccountRequestDTO();
+            requestDTO.setName(name);
+            requestDTO.setExternalAccountId("");
+            requestDTO.setQuotaMax(10);
+            requestDTO.setEmailAddress(email_address);
         }, "Expected a NullPointerException");
     }
 }

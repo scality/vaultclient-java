@@ -21,6 +21,7 @@ import com.amazonaws.transform.StandardErrorUnmarshaller;
 import com.amazonaws.transform.Unmarshaller;
 import com.amazonaws.util.CredentialUtils;
 import com.scality.vaultclient.dto.*;
+import lombok.Generated;
 import org.w3c.dom.Node;
 
 import java.net.URI;
@@ -44,8 +45,9 @@ public class AccountServicesClient extends AmazonWebServiceClient implements Acc
      * @see DefaultAWSCredentialsProviderChain
      */
     public AccountServicesClient() {
-        this(DefaultAWSCredentialsProviderChain.getInstance(), configFactory.getConfig());
+        this(configFactory.getConfig());
     }
+
     /**
      * Constructs a new AmazonWebServiceClient object using the specified
      * configuration.
@@ -56,23 +58,30 @@ public class AccountServicesClient extends AmazonWebServiceClient implements Acc
         this(DefaultAWSCredentialsProviderChain.getInstance(), clientConfiguration);
     }
 
-    /**
-     * Constructs a new AmazonWebServiceClient object using the specified
-     * configuration and request metric collector.
-     *
-     * @param clientConfiguration    The client configuration for this client.
-     * @param requestMetricCollector optional request metric collector to be used at the http
-     */
-    public AccountServicesClient(ClientConfiguration clientConfiguration, RequestMetricCollector requestMetricCollector) {
+    /*public AccountServicesClient(ClientConfiguration clientConfiguration, RequestMetricCollector requestMetricCollector) {
         super(clientConfiguration, requestMetricCollector);
     }
 
     protected AccountServicesClient(ClientConfiguration clientConfiguration, RequestMetricCollector requestMetricCollector, boolean disableStrictHostNameVerification) {
         super(clientConfiguration, requestMetricCollector, disableStrictHostNameVerification);
-    }
+    }*/
 
+    /**
+     * Constructs a new client to invoke service methods on IAM. A credentials provider chain will be used that searches
+     * for credentials in this order:
+     * <ul>
+     * <li>Environment Variables - AWS_ACCESS_KEY_ID and AWS_SECRET_KEY</li>
+     * <li>Java System Properties - aws.accessKeyId and aws.secretKey</li>
+     * <li>Instance profile credentials delivered through the Amazon EC2 metadata service</li>
+     * </ul>
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not return until the service call
+     * completes.
+     * @param awsCredentials the aws credentials
+     */
     public AccountServicesClient(AWSCredentials awsCredentials) {
-        this(awsCredentials, configFactory.getConfig());
+        this(new AWSStaticCredentialsProvider(awsCredentials));
     }
 
     public AccountServicesClient(AWSCredentialsProvider awsCredentialsProvider) {
@@ -80,10 +89,7 @@ public class AccountServicesClient extends AmazonWebServiceClient implements Acc
     }
 
     public AccountServicesClient(AWSCredentials awsCredentials, ClientConfiguration clientConfiguration) {
-        super(clientConfiguration);
-        this.awsCredentialsProvider = new AWSStaticCredentialsProvider(awsCredentials);
-        this.advancedConfig = AdvancedConfig.EMPTY;
-        init();
+        this(new AWSStaticCredentialsProvider(awsCredentials), clientConfiguration);
     }
 
     /**
@@ -150,6 +156,27 @@ public class AccountServicesClient extends AmazonWebServiceClient implements Acc
         this.client = client;
     }
 
+    /**
+     * Constructs a new client to invoke service methods on IAM. A credentials provider chain will be used that searches
+     * for credentials in this order:
+     * <ul>
+     * <li>Environment Variables - AWS_ACCESS_KEY_ID and AWS_SECRET_KEY</li>
+     * <li>Java System Properties - aws.accessKeyId and aws.secretKey</li>
+     * <li>Instance profile credentials delivered through the Amazon EC2 metadata service</li>
+     * </ul>
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not return until the service call
+     * completes.
+     *
+     * @param client         *        client object.
+     * @param awsCredentials *        the aws credentials
+     */
+    public AccountServicesClient(AmazonHttpClient client, AWSCredentials awsCredentials) {
+        this(awsCredentials);
+        this.client = client;
+    }
+
 //    private static final Log log = LogFactory.getLog(AccountServices.class);
 
     /** Default signing name for the service. */
@@ -169,6 +196,7 @@ public class AccountServicesClient extends AmazonWebServiceClient implements Acc
         return awsCredentialsProvider;
     }
 
+    @Generated
     public void setAwsCredentialsProvider(AWSCredentialsProvider awsCredentialsProvider) {
         this.awsCredentialsProvider = awsCredentialsProvider;
     }
@@ -177,6 +205,7 @@ public class AccountServicesClient extends AmazonWebServiceClient implements Acc
         return advancedConfig;
     }
 
+    @Generated
     public void setAdvancedConfig(AdvancedConfig advancedConfig) {
         this.advancedConfig = advancedConfig;
     }
@@ -217,7 +246,7 @@ public class AccountServicesClient extends AmazonWebServiceClient implements Acc
         request.addHandlerContext(HandlerContextKey.SIGNING_REGION, getSigningRegion());
         request.addHandlerContext(HandlerContextKey.SERVICE_ID, "IAM");
         request.addHandlerContext(HandlerContextKey.OPERATION_NAME, "CreateAccount");
-        request.addHandlerContext(HandlerContextKey.ADVANCED_CONFIG, advancedConfig);
+        request.addHandlerContext(HandlerContextKey.ADVANCED_CONFIG, getAdvancedConfig());
 
         HttpResponseHandler<AmazonWebServiceResponse<CreateAccountResponseDTO>> responseHandler = protocolFactory.createResponseHandler(
                 new JsonOperationMetadata().withPayloadJson(true).withHasStreamingSuccessResponse(true), new CreateAccountResponseJsonUnmarshaller());
@@ -241,7 +270,7 @@ public class AccountServicesClient extends AmazonWebServiceClient implements Acc
     private <X, Y extends AmazonWebServiceRequest> Response<X> invoke(Request<Y> request, HttpResponseHandler<AmazonWebServiceResponse<X>> responseHandler,
                                                                       ExecutionContext executionContext, URI cachedEndpoint, URI uriFromEndpointTrait) {
 
-        executionContext.setCredentialsProvider(CredentialUtils.getCredentialsProvider(request.getOriginalRequest(), awsCredentialsProvider));
+        executionContext.setCredentialsProvider(CredentialUtils.getCredentialsProvider(request.getOriginalRequest(), getAwsCredentialsProvider()));
 
         return doInvoke(request, responseHandler, executionContext, cachedEndpoint, uriFromEndpointTrait);
     }
@@ -252,19 +281,10 @@ public class AccountServicesClient extends AmazonWebServiceClient implements Acc
      **/
     private <X, Y extends AmazonWebServiceRequest> Response<X> doInvoke(Request<Y> request, HttpResponseHandler<AmazonWebServiceResponse<X>> responseHandler,
                                                                         ExecutionContext executionContext, URI discoveredEndpoint, URI uriFromEndpointTrait) {
-
-        if (discoveredEndpoint != null) {
-            request.setEndpoint(discoveredEndpoint);
-            request.getOriginalRequest().getRequestClientOptions().appendUserAgent("endpoint-discovery");
-        } else if (uriFromEndpointTrait != null) {
-            request.setEndpoint(uriFromEndpointTrait);
-        } else {
-            request.setEndpoint(endpoint);
-        }
-
+        request.setEndpoint(endpoint);
         request.setTimeOffset(timeOffset);
 
-        DefaultErrorResponseHandler errorResponseHandler = new DefaultErrorResponseHandler(exceptionUnmarshallers);
+        DefaultErrorResponseHandler errorResponseHandler = new DefaultErrorResponseHandler(getExceptionUnmarshallers());
 
 //        return client.execute(request, responseHandler, errorResponseHandler, executionContext);
         Response<X> response = client.execute(request, responseHandler, errorResponseHandler, executionContext,new AmazonWebServiceRequestAdapter(request.getOriginalRequest()));

@@ -13,8 +13,6 @@ public class CreateAccountResponseJsonUnmarshaller implements Unmarshaller<Creat
         try {
             if (context.getHttpResponse().getContent() != null) {
                 String response = IOUtils.toString(context.getHttpResponse().getContent());
-//                JsonContent jsonContent = JsonContent.createJsonContent(context.getHttpResponse(), SdkStructuredPlainJsonFactory.JSON_FACTORY);
-//                String response = new String(jsonContent.getRawContent(), StandardCharsets.UTF_8);
                 return new Gson().fromJson(response, CreateAccountResponseDTO.class);
             }
         } catch (Exception e) {

@@ -1,4 +1,4 @@
-package com.scality.vaultclient;
+package com.scality.vaultclient.services;
 
 import com.amazonaws.Request;
 import com.amazonaws.Response;
@@ -8,11 +8,6 @@ import com.amazonaws.http.HttpResponse;
 import com.scality.vaultclient.dto.AccountData;
 import com.scality.vaultclient.dto.CreateAccountRequestDTO;
 import com.scality.vaultclient.dto.CreateAccountResponseDTO;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
-import com.scality.vaultclient.services.VaultClientException;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
@@ -22,13 +17,22 @@ import org.mockito.stubbing.Answer;
 
 import java.util.Date;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
 public class AccountServicesClientTest {
 
     // mock vault client
     protected static AmazonHttpClient amazonHttpClient;
 
+    // dummy Aws credentials
+    protected static BasicAWSCredentials basicAWSCredentials;
+
     // Service
     protected static com.scality.vaultclient.services.AccountServicesClient accountServicesClient;
+
+    // Service with aws creds
+    protected static com.scality.vaultclient.services.AccountServicesClient accountServicesClient2;
 
     private static final String DEFAULT_ACCOUNT_ID = "001583654825";
 
@@ -85,10 +89,13 @@ public class AccountServicesClientTest {
                         return new Response<>(response,null);
                     }
                 });
+
+        basicAWSCredentials = new BasicAWSCredentials("accesskey", "secretkey");
+        accountServicesClient2 = new com.scality.vaultclient.services.AccountServicesClient(amazonHttpClient, basicAWSCredentials);
     }
 
     @Test
-    public void createAccount() throws Exception {
+    public void testCreateAccount() throws Exception {
 
         CreateAccountResponseDTO response = accountServicesClient.createAccount(createAccountRequestDTO).getAwsResponse();
 
@@ -101,7 +108,20 @@ public class AccountServicesClientTest {
     }
 
     @Test
-    public void createAccountWithQuota() throws Exception {
+    public void testCreateAccountWithCredentials() throws Exception {
+
+        CreateAccountResponseDTO response = accountServicesClient2.createAccount(createAccountRequestDTO).getAwsResponse();
+
+        assertEquals(DEFAULT_EMAIL_ADDR, response.getAccount().getData().getEmailAddress(), ERR_EMAIL_ADDR_INVALID);
+        assertEquals(DEFAULT_ACCOUNT_NAME, response.getAccount().getData().getName(), ERR_NAME_INVALID);
+        assertNotNull(response.getAccount().getData().getArn(), ERR_ARN_NULL);
+        assertNotNull(response.getAccount().getData().getCreateDate(), ERR_CREATE_DATE_NULL);
+        assertNotNull(response.getAccount().getData().getId(), ERR_ID_NULL);
+        assertNotNull(response.getAccount().getData().getCanonicalId(), ERR_CANONICAL_ID_NULL);
+    }
+
+    @Test
+    public void testCreateAccountWithQuota() throws Exception {
 
         CreateAccountRequestDTO createAccountRequestDTO1 = CreateAccountRequestDTO.builder()
                 .emailAddress(DEFAULT_EMAIL_ADDR)
@@ -121,7 +141,7 @@ public class AccountServicesClientTest {
     }
 
     @Test
-    public void createAccountWithExtId() throws Exception {
+    public void testCreateAccountWithExtId() throws Exception {
 
         CreateAccountRequestDTO createAccountRequestDTO2 = CreateAccountRequestDTO.builder()
                 .emailAddress(DEFAULT_EMAIL_ADDR)
@@ -140,7 +160,7 @@ public class AccountServicesClientTest {
     }
 
     @Test
-    public void createAccountRequestWithNullEmail(){
+    public void testCreateAccountRequestWithNullEmail(){
 
         assertThrows(NullPointerException.class, () -> {
             CreateAccountRequestDTO.builder()
@@ -151,7 +171,7 @@ public class AccountServicesClientTest {
     }
 
     @Test
-    public void createAccountRequestWithNullName(){
+    public void testCreateAccountRequestWithNullName(){
 
         assertThrows(NullPointerException.class, () -> {
             CreateAccountRequestDTO.builder()
@@ -191,7 +211,7 @@ public class AccountServicesClientTest {
     }
 
     @Test
-    public void createAccountError400() throws Exception {
+    public void testCreateAccountError400() throws Exception {
 
         when(amazonHttpClient.execute(any(com.amazonaws.Request.class), any(), any(), any(),any()))
                 .thenAnswer(new Answer<Response>() {
@@ -222,10 +242,10 @@ public class AccountServicesClientTest {
     @Disabled
     @Test
     @SuppressWarnings( "deprecation" )
-    public void createAccountWithActualVault() {
+    public void testCreateAccountWithActualVault() {
             //"D4IT2AWSB588GO5J9T00": "UEEu8tYlsOGGrgf4DAiSZD6apVNPUWqRiPG0nTB6"
             com.scality.vaultclient.services.AccountServicesClient amazonIdentityManagementClient = new com.scality.vaultclient.services.AccountServicesClient(
-                    new BasicAWSCredentials("D4IT2AWSB588GO5J9T00", "UEEu8tYlsOGGrgf4DAiSZD6apVNPUWqRiPG0nTB6"));
+                    new BasicAWSCredentials("accesskey", "secretkey"));
 
             amazonIdentityManagementClient.setEndpoint("http://localhost:8600");
             String email_address = DEFAULT_EMAIL_ADDR;
@@ -244,4 +264,5 @@ public class AccountServicesClientTest {
             assertNotNull(response.getAccount().getData().getId(), ERR_ID_NULL);
             assertNotNull(response.getAccount().getData().getCanonicalId(), ERR_CANONICAL_ID_NULL);
     }
+
 }

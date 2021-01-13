@@ -1,4 +1,4 @@
-package com.scality.vaultclient;
+package com.scality.vaultclient.services;
 
 import com.scality.vaultclient.dto.CreateAccountRequestDTO;
 import org.junit.jupiter.api.Test;
