@@ -13,63 +13,30 @@ test {
 }
 
 group 'com.github.scality'
-version '0.0.1-SNAPSHOT'
-//task sourceJar(type: Jar) {
-//    classifier "sources"
-//    from sourceSets.main.allJava
-//}
-//task javadocJar(type: Jar, dependsOn: javadoc) {
-//    classifier "javadoc"
-//    from javadoc.destinationDir
-//}
+version '0.1.0-SNAPSHOT'
 artifacts {
     archives jar
-//    archives sourceJar
-//    archives javadocJar
 }
 publishing {
     publications {
         mavenJava(MavenPublication) {
-//            customizePom(pom)
             groupId 'com.github.scality'
             artifactId 'vaultclient'
-            version '0.0.1-SNAPSHOT'
+            version '0.1.0-SNAPSHOT'
 
             from components.java
 
-//            artifact(sourceJar) {
-//                classifier = 'sources'
-//            }
-//            artifact(javadocJar) {
-//                classifier = 'javadoc'
-//            }
         }
     }
 
     repositories {
         mavenLocal()
-//        mavenCentral()
-//        jcenter()
-//        maven {
-//            url = 'https://repo.maven.apache.org/maven2'
-//        }
+        mavenCentral()
+        jcenter()
+        maven {
+            url = 'https://repo.maven.apache.org/maven2'
+        }
     }
-}
-
-apply plugin: 'com.bmuschko.nexus'
-
-nexus {
-    sign = true
-    repositoryUrl = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
-    snapshotRepositoryUrl = 'https://oss.sonatype.org/content/repositories/snapshots/'
-//    username = ossrhUser
-//    password = ossrhPassword
-}
-
-extraArchive {
-    sources = true
-    tests = true
-    javadoc = true
 }
 
 jar.enabled(true)
