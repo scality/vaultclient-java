@@ -15,7 +15,7 @@ plugins {
     id 'com.github.ksoichiro.console.reporter' version '0.6.2'
 }
 
-group 'com.github.scality'
+group 'com.scality'
 version '0.1.0-SNAPSHOT'
 description = 'vaultclient-java'
 sourceCompatibility = '1.8'

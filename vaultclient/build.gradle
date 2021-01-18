@@ -12,7 +12,7 @@ test {
     useJUnitPlatform()
 }
 
-group 'com.github.scality'
+group 'com.scality'
 version '0.1.0-SNAPSHOT'
 artifacts {
     archives jar
@@ -20,7 +20,7 @@ artifacts {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            groupId 'com.github.scality'
+            groupId 'com.scality'
             artifactId 'vaultclient'
             version '0.1.0-SNAPSHOT'
 
