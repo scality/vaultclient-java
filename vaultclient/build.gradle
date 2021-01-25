@@ -9,6 +9,31 @@ test {
     useJUnitPlatform()
 }
 
-group 'com.github.scality'
-version '0.0.1-SNAPSHOT'
+group 'com.scality'
+version '0.1.0-SNAPSHOT'
+artifacts {
+    archives jar
+}
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId 'com.scality'
+            artifactId 'vaultclient'
+            version '0.1.0-SNAPSHOT'
+
+            from components.java
+
+        }
+    }
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+        maven {
+            url = 'https://repo.maven.apache.org/maven2'
+        }
+    }
+}
+
 jar.enabled(true)
