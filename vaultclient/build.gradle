@@ -4,6 +4,7 @@ dependencies {
     implementation 'org.projectlombok:lombok:1.18.16'
     annotationProcessor 'org.projectlombok:lombok:1.18.16'
     implementation 'com.amazonaws:aws-java-sdk-s3:1.11.914'
+    implementation 'com.google.code.gson:gson:2.8.6'
     testImplementation 'org.mockito:mockito-core:2.7.22'
 }
 
