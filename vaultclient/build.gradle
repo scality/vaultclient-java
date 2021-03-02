@@ -5,6 +5,7 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     implementation 'com.amazonaws:aws-java-sdk-s3:1.11.914'
     testImplementation 'org.mockito:mockito-core:2.7.22'
+    implementation 'com.google.code.gson:gson:2.8.6'
 }
 
 test {
