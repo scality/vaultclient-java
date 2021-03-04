@@ -38,7 +38,7 @@ class CreateAccountResponseJsonUnmarshallerTest {
         data.setName("name");
         data.setEmailAddress("emailAddress");
         data.setId("id");
-        data.setQuotaMax(0);
+        data.setQuotaMax(100);
         data.setCreateDate(new GregorianCalendar(2019, Calendar.JANUARY, 1).getTime());
         data.setCanonicalId("canonicalId");
         data.setAliasList(Arrays.asList("value"));
