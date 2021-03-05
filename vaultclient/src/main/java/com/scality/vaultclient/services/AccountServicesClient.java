@@ -8,16 +8,26 @@ import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.client.AwsSyncClientParams;
 import com.amazonaws.client.builder.AdvancedConfig;
 import com.amazonaws.handlers.HandlerChainFactory;
+import com.amazonaws.handlers.HandlerContextKey;
 import com.amazonaws.http.AmazonHttpClient;
+import com.amazonaws.http.DefaultErrorResponseHandler;
+import com.amazonaws.http.ExecutionContext;
+import com.amazonaws.http.HttpResponseHandler;
+import com.amazonaws.internal.AmazonWebServiceRequestAdapter;
 import com.amazonaws.metrics.RequestMetricCollector;
 import com.amazonaws.protocol.json.JsonClientMetadata;
+import com.amazonaws.protocol.json.JsonOperationMetadata;
 import com.amazonaws.transform.StandardErrorUnmarshaller;
 import com.amazonaws.transform.Unmarshaller;
+import com.amazonaws.util.CredentialUtils;
 import com.scality.vaultclient.dto.CreateAccountRequestDTO;
+import com.scality.vaultclient.dto.CreateAccountRequestProtocolMarshaller;
 import com.scality.vaultclient.dto.CreateAccountResponseDTO;
+import com.scality.vaultclient.dto.CreateAccountResponseJsonUnmarshaller;
 import lombok.Generated;
 import org.w3c.dom.Node;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -231,7 +241,56 @@ public class AccountServicesClient extends AmazonWebServiceClient implements Acc
 
     @Override
     public Response<CreateAccountResponseDTO> createAccount(CreateAccountRequestDTO createAccountRequestDTO) {
-        return null;
+
+        ExecutionContext executionContext = createExecutionContext(createAccountRequestDTO);
+
+        Request<CreateAccountRequestDTO> request = new CreateAccountRequestProtocolMarshaller(protocolFactory).marshall(super.beforeMarshalling(createAccountRequestDTO));
+        request.addHandlerContext(HandlerContextKey.ENDPOINT_OVERRIDDEN, isEndpointOverridden());
+        request.addHandlerContext(HandlerContextKey.SIGNING_REGION, getSigningRegion());
+        request.addHandlerContext(HandlerContextKey.SERVICE_ID, "IAM");
+        request.addHandlerContext(HandlerContextKey.OPERATION_NAME, "CreateAccount");
+        request.addHandlerContext(HandlerContextKey.ADVANCED_CONFIG, getAdvancedConfig());
+
+        HttpResponseHandler<AmazonWebServiceResponse<CreateAccountResponseDTO>> responseHandler = protocolFactory.createResponseHandler(
+                new JsonOperationMetadata().withPayloadJson(true).withHasStreamingSuccessResponse(true), new CreateAccountResponseJsonUnmarshaller());
+        Response<CreateAccountResponseDTO> response = invoke(request, responseHandler, executionContext);
+
+        return response;
     }
 
+    /**
+     * Normal invoke with authentication. Credentials are required and may be overriden at the request level.
+     **/
+    private <X, Y extends AmazonWebServiceRequest> Response<X> invoke(Request<Y> request, HttpResponseHandler<AmazonWebServiceResponse<X>> responseHandler,
+                                                                      ExecutionContext executionContext) {
+
+        return invoke(request, responseHandler, executionContext, null, null);
+    }
+
+    /**
+     * Normal invoke with authentication. Credentials are required and may be overriden at the request level.
+     **/
+    private <X, Y extends AmazonWebServiceRequest> Response<X> invoke(Request<Y> request, HttpResponseHandler<AmazonWebServiceResponse<X>> responseHandler,
+                                                                      ExecutionContext executionContext, URI cachedEndpoint, URI uriFromEndpointTrait) {
+
+        executionContext.setCredentialsProvider(CredentialUtils.getCredentialsProvider(request.getOriginalRequest(), getAwsCredentialsProvider()));
+
+        return doInvoke(request, responseHandler, executionContext, cachedEndpoint, uriFromEndpointTrait);
+    }
+
+    /**
+     * Invoke the request using the http client. Assumes credentials (or lack thereof) have been configured in the
+     * ExecutionContext beforehand.
+     **/
+    private <X, Y extends AmazonWebServiceRequest> Response<X> doInvoke(Request<Y> request, HttpResponseHandler<AmazonWebServiceResponse<X>> responseHandler,
+                                                                        ExecutionContext executionContext, URI discoveredEndpoint, URI uriFromEndpointTrait) {
+        request.setEndpoint(endpoint);
+        request.setTimeOffset(timeOffset);
+
+        DefaultErrorResponseHandler errorResponseHandler = new DefaultErrorResponseHandler(getExceptionUnmarshallers());
+
+//        return client.execute(request, responseHandler, errorResponseHandler, executionContext);
+        Response<X> response = client.execute(request, responseHandler, errorResponseHandler, executionContext,new AmazonWebServiceRequestAdapter(request.getOriginalRequest()));
+        return response;
+    }
 }

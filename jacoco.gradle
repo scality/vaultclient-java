@@ -20,8 +20,7 @@ jacocoTestReport {
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
-                    "**/dto/*.*",
-                    "**/services/AccountServicesClient.*"
+                    "**/dto/*.*"
             ])
         }))
     }
@@ -32,8 +31,7 @@ jacocoTestCoverageVerification {
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
-                    "**/dto/*.*",
-                    "**/services/AccountServicesClient.*"
+                    "**/dto/*.*"
             ])
         }))
     }
