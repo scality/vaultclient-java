@@ -21,9 +21,10 @@ import com.amazonaws.transform.StandardErrorUnmarshaller;
 import com.amazonaws.transform.Unmarshaller;
 import com.amazonaws.util.CredentialUtils;
 import com.scality.vaultclient.dto.CreateAccountRequestDTO;
-import com.scality.vaultclient.dto.CreateAccountRequestProtocolMarshaller;
+import com.scality.vaultclient.dto.CreateAccountRequestMarshaller;
 import com.scality.vaultclient.dto.CreateAccountResponseDTO;
-import com.scality.vaultclient.dto.CreateAccountResponseJsonUnmarshaller;
+import com.scality.vaultclient.dto.GenericRequestProtocolMarshaller;
+import com.scality.vaultclient.dto.GenericResponseJsonUnmarshaller;
 import lombok.Generated;
 import org.w3c.dom.Node;
 
@@ -244,7 +245,8 @@ public class AccountServicesClient extends AmazonWebServiceClient implements Acc
 
         ExecutionContext executionContext = createExecutionContext(createAccountRequestDTO);
 
-        Request<CreateAccountRequestDTO> request = new CreateAccountRequestProtocolMarshaller(protocolFactory).marshall(super.beforeMarshalling(createAccountRequestDTO));
+        Request<CreateAccountRequestDTO> request = new GenericRequestProtocolMarshaller<CreateAccountRequestDTO>(protocolFactory, CreateAccountRequestMarshaller.getInstance())
+                .marshall(super.beforeMarshalling(createAccountRequestDTO));
         request.addHandlerContext(HandlerContextKey.ENDPOINT_OVERRIDDEN, isEndpointOverridden());
         request.addHandlerContext(HandlerContextKey.SIGNING_REGION, getSigningRegion());
         request.addHandlerContext(HandlerContextKey.SERVICE_ID, "IAM");
@@ -252,7 +254,7 @@ public class AccountServicesClient extends AmazonWebServiceClient implements Acc
         request.addHandlerContext(HandlerContextKey.ADVANCED_CONFIG, getAdvancedConfig());
 
         HttpResponseHandler<AmazonWebServiceResponse<CreateAccountResponseDTO>> responseHandler = protocolFactory.createResponseHandler(
-                new JsonOperationMetadata().withPayloadJson(true).withHasStreamingSuccessResponse(true), new CreateAccountResponseJsonUnmarshaller());
+                new JsonOperationMetadata().withPayloadJson(true).withHasStreamingSuccessResponse(true), new GenericResponseJsonUnmarshaller<CreateAccountResponseDTO>(CreateAccountResponseDTO.class));
         Response<CreateAccountResponseDTO> response = invoke(request, responseHandler, executionContext);
 
         return response;

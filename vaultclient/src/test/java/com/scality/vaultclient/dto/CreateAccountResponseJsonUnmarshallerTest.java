@@ -21,11 +21,11 @@ import static org.mockito.Mockito.when;
 
 class CreateAccountResponseJsonUnmarshallerTest {
 
-    private CreateAccountResponseJsonUnmarshaller createAccountResponseJsonUnmarshallerUnderTest;
+    private GenericResponseJsonUnmarshaller<CreateAccountResponseDTO> createAccountResponseJsonUnmarshallerUnderTest;
 
     @BeforeEach
     void setUp() {
-        createAccountResponseJsonUnmarshallerUnderTest = CreateAccountResponseJsonUnmarshaller.getInstance();
+        createAccountResponseJsonUnmarshallerUnderTest = new GenericResponseJsonUnmarshaller<CreateAccountResponseDTO>(CreateAccountResponseDTO.class);
     }
 
     @Test
@@ -73,11 +73,11 @@ class CreateAccountResponseJsonUnmarshallerTest {
         assertThrows(Exception.class, () -> createAccountResponseJsonUnmarshallerUnderTest.unmarshall(context));
     }
 
-    public CreateAccountResponseJsonUnmarshaller getCreateAccountResponseJsonUnmarshallerUnderTest() {
+    public GenericResponseJsonUnmarshaller<CreateAccountResponseDTO> getCreateAccountResponseJsonUnmarshallerUnderTest() {
         return createAccountResponseJsonUnmarshallerUnderTest;
     }
 
-    public void setCreateAccountResponseJsonUnmarshallerUnderTest(CreateAccountResponseJsonUnmarshaller createAccountResponseJsonUnmarshallerUnderTest) {
+    public void setCreateAccountResponseJsonUnmarshallerUnderTest(GenericResponseJsonUnmarshaller<CreateAccountResponseDTO> createAccountResponseJsonUnmarshallerUnderTest) {
         this.createAccountResponseJsonUnmarshallerUnderTest = createAccountResponseJsonUnmarshallerUnderTest;
     }
 }

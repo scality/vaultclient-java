@@ -16,7 +16,8 @@ class GenericRequestMarshallerTest {
 
     @BeforeEach
     public void setUp() {
-        genericRequestMarshallerUnderTest = new GenericRequestMarshaller();
+        // Using CreateAccountRequestMarshaller as an example to test GenericRequestMarshaller
+        genericRequestMarshallerUnderTest = new CreateAccountRequestMarshaller();
     }
 
     @Test

@@ -10,32 +10,41 @@ import com.amazonaws.protocol.json.SdkJsonProtocolFactory;
 import com.amazonaws.transform.Marshaller;
 
 /**
- * CreateAccountRequestProtocolMarshaller Marshaller
+ * A GenericRequestProtocolMarshaller that implements Marshaller
  */
-public class CreateAccountRequestProtocolMarshaller implements Marshaller<Request<CreateAccountRequestDTO>, CreateAccountRequestDTO> {
+public class GenericRequestProtocolMarshaller<T> implements Marshaller<Request<T>,T> {
 
     private static final OperationInfo SDK_OPERATION_BINDING = OperationInfo.builder().protocol(Protocol.AWS_JSON).requestUri("/")
             .httpMethodName(HttpMethodName.POST).hasExplicitPayloadMember(false).hasPayloadMembers(false).serviceName("Vault").build();
 
     private final SdkJsonProtocolFactory protocolFactory;
 
-    public CreateAccountRequestProtocolMarshaller(SdkJsonProtocolFactory protocolFactory) {
+    private final GenericRequestMarshaller<T> requestMarshaller;
+
+    public GenericRequestProtocolMarshaller(SdkJsonProtocolFactory protocolFactory, GenericRequestMarshaller requestMarshaller) {
         this.protocolFactory = protocolFactory;
+        this.requestMarshaller = requestMarshaller;
     }
 
+    /**
+     * Instantiates protocolMarshaller and marshals request dto with bindings in to Amazon Web Service Request object
+     *
+     * @param request   the request dto
+     * @return Returns the Amazon Web Service Request object
+     */
     @Override
-    public Request<CreateAccountRequestDTO> marshall(CreateAccountRequestDTO createAccountRequestDTO) {
+    public Request<T> marshall(T request) {
 
-        if (createAccountRequestDTO == null) {
+        if (request == null) {
             throw new SdkClientException("Invalid argument passed to marshall(...)");
         }
 
         try {
-            final ProtocolRequestMarshaller<CreateAccountRequestDTO> protocolMarshaller = protocolFactory.createProtocolMarshaller(SDK_OPERATION_BINDING,
-                    createAccountRequestDTO);
+            final ProtocolRequestMarshaller<T> protocolMarshaller = protocolFactory.createProtocolMarshaller(SDK_OPERATION_BINDING,
+                    request);
 
             protocolMarshaller.startMarshalling();
-            CreateAccountRequestMarshaller.getInstance().marshall(createAccountRequestDTO, protocolMarshaller);
+            requestMarshaller.marshall( request, protocolMarshaller);
             return protocolMarshaller.finishMarshalling();
         } catch (Exception e) {
             throw new SdkClientException("Unable to marshall request to JSON: " + e.getMessage(), e);

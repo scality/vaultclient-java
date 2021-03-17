@@ -3,11 +3,14 @@ package com.scality.vaultclient.dto;
 import com.amazonaws.protocol.MarshallLocation;
 import com.amazonaws.protocol.MarshallingInfo;
 import com.amazonaws.protocol.MarshallingType;
-import com.amazonaws.protocol.ProtocolMarshaller;
+import com.amazonaws.protocol.ProtocolRequestMarshaller;
 import com.amazonaws.util.StringUtils;
 import com.scality.vaultclient.services.VaultClientException;
 
-public class CreateAccountRequestMarshaller extends GenericRequestMarshaller{
+/**
+ * The type Create account request marshaller extends GenericRequestMarshaller to marshall Create Account Requests.
+ */
+public class CreateAccountRequestMarshaller extends GenericRequestMarshaller<CreateAccountRequestDTO>{
 
     private static final MarshallingInfo<String> NAME_BINDING = MarshallingInfo.builder(MarshallingType.STRING).marshallLocation(MarshallLocation.PAYLOAD)
             .marshallLocationName("name").build();
@@ -25,7 +28,14 @@ public class CreateAccountRequestMarshaller extends GenericRequestMarshaller{
         return instance;
     }
 
-    public void marshall(CreateAccountRequestDTO createAccountRequestDTO, ProtocolMarshaller protocolMarshaller) {
+    /**
+     * Binds protocolMarshaller with createAccountRequestDTO parameters to marshall.
+     *
+     * @param createAccountRequestDTO         the request dto of type CreateAccountRequestDTO
+     * @param protocolMarshaller the protocol marshaller
+     */
+    @Override
+    public void marshall(CreateAccountRequestDTO createAccountRequestDTO, ProtocolRequestMarshaller<CreateAccountRequestDTO> protocolMarshaller) {
 
         super.marshall(createAccountRequestDTO, protocolMarshaller, CREATE_ACCOUNT_ACTION);
 
