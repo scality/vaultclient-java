@@ -9,6 +9,9 @@ import com.amazonaws.http.AmazonHttpClient;
 import com.scality.vaultclient.dto.CreateAccountRequestDTO;
 import com.scality.vaultclient.dto.CreateAccountRequestMarshaller;
 import com.scality.vaultclient.dto.CreateAccountResponseDTO;
+import com.scality.vaultclient.dto.ListAccountsRequestDTO;
+import com.scality.vaultclient.dto.ListAccountsRequestMarshaller;
+import com.scality.vaultclient.dto.ListAccountsResponseDTO;
 
 /**
  * Account Services Java client.
@@ -21,6 +24,12 @@ public class AccountServicesClient extends BaseServicesClient implements Account
     public Response<CreateAccountResponseDTO> createAccount(CreateAccountRequestDTO createAccountRequestDTO) {
 
         return execute(createAccountRequestDTO, CreateAccountResponseDTO.class, "CreateAccount", CreateAccountRequestMarshaller.getInstance());
+    }
+
+    @Override
+    public Response<ListAccountsResponseDTO> listAccounts(ListAccountsRequestDTO listAccountsRequestDTO) {
+
+        return execute(listAccountsRequestDTO, ListAccountsResponseDTO.class, "ListAccounts", ListAccountsRequestMarshaller.getInstance());
     }
 
     /**
