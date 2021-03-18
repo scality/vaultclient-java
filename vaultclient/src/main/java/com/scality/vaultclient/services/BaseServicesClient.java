@@ -73,14 +73,6 @@ public abstract class BaseServicesClient extends AmazonWebServiceClient{
         this(DefaultAWSCredentialsProviderChain.getInstance(), clientConfiguration);
     }
 
-    /*public AccountServicesClient(ClientConfiguration clientConfiguration, RequestMetricCollector requestMetricCollector) {
-        super(clientConfiguration, requestMetricCollector);
-    }
-
-    protected AccountServicesClient(ClientConfiguration clientConfiguration, RequestMetricCollector requestMetricCollector, boolean disableStrictHostNameVerification) {
-        super(clientConfiguration, requestMetricCollector, disableStrictHostNameVerification);
-    }*/
-
     /**
      * Constructs a new client to invoke service methods on IAM. A credentials provider chain will be used that searches
      * for credentials in this order:
@@ -244,9 +236,6 @@ public abstract class BaseServicesClient extends AmazonWebServiceClient{
         exceptionUnmarshallers.add(new StandardErrorUnmarshaller(VaultClientException.class));
 
         setServiceNameIntern(DEFAULT_SIGNING_NAME);
-//        setEndpointPrefix(ENDPOINT_PREFIX);
-        // calling this.setEndPoint(...) will also modify the signer accordingly
-//        this.setEndpoint("iam.amazonaws.com");
         HandlerChainFactory chainFactory = new HandlerChainFactory();
         requestHandler2s.addAll(chainFactory.getGlobalHandlers());
     }
@@ -259,6 +248,7 @@ public abstract class BaseServicesClient extends AmazonWebServiceClient{
      * @param requestDTO        the request dto
      * @param responseClassType the response class type
      * @param operationName     the operation name
+     * @param requestMarshaller     the requestMarshaller
      * @return the AWS response wrapper
      */
     public <T extends AmazonWebServiceRequest,R> Response<R> execute(T requestDTO, Class<R> responseClassType, String operationName, GenericRequestMarshaller requestMarshaller) {
@@ -275,9 +265,8 @@ public abstract class BaseServicesClient extends AmazonWebServiceClient{
 
         HttpResponseHandler<AmazonWebServiceResponse<R>> responseHandler = protocolFactory.createResponseHandler(
                 new JsonOperationMetadata().withPayloadJson(true).withHasStreamingSuccessResponse(true), new GenericResponseJsonUnmarshaller<R>(responseClassType));
-        Response<R> response = invoke(request, responseHandler, executionContext);
 
-        return response;
+        return invoke(request, responseHandler, executionContext);
     }
 
     /**
@@ -311,8 +300,6 @@ public abstract class BaseServicesClient extends AmazonWebServiceClient{
 
         DefaultErrorResponseHandler errorResponseHandler = new DefaultErrorResponseHandler(getExceptionUnmarshallers());
 
-//        return client.execute(request, responseHandler, errorResponseHandler, executionContext);
-        Response<X> response = client.execute(request, responseHandler, errorResponseHandler, executionContext,new AmazonWebServiceRequestAdapter(request.getOriginalRequest()));
-        return response;
+        return client.execute(request, responseHandler, errorResponseHandler, executionContext,new AmazonWebServiceRequestAdapter(request.getOriginalRequest()));
     }
 }

@@ -12,6 +12,7 @@ import com.amazonaws.transform.Marshaller;
 /**
  * A GenericRequestProtocolMarshaller that implements Marshaller
  */
+@SuppressWarnings("unchecked")
 public class GenericRequestProtocolMarshaller<T> implements Marshaller<Request<T>,T> {
 
     private static final OperationInfo SDK_OPERATION_BINDING = OperationInfo.builder().protocol(Protocol.AWS_JSON).requestUri("/")
