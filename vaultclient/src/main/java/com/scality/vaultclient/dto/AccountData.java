@@ -5,6 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Data
 public class AccountData implements Serializable {
@@ -18,4 +19,5 @@ public class AccountData implements Serializable {
     String canonicalId;
     List<String> aliasList;
     List<String> oidcpList;
+    Map<String,String> customAttributes;
 }
