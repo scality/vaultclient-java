@@ -9,6 +9,7 @@ import lombok.ToString;
 import lombok.NonNull;
 
 import java.io.Serializable;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -28,6 +29,9 @@ public class CreateAccountRequestDTO extends com.amazonaws.AmazonWebServiceReque
     private String emailAddress;
 
     private int quotaMax;
+
+    private Map<String, String> customAttributes;
+//    private String customAttributes;
 
 
 }

@@ -2,6 +2,9 @@ package com.scality.vaultclient.dto;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -21,11 +24,16 @@ public class CreateAccountRequestDTOTest {
         String email_address = DEFAULT_EMAIL_ADDR;
         String name = DEFAULT_ACCOUNT_NAME;
 
+        Map<String, String> customAttributes  = new HashMap<>() ;
+        customAttributes.put("cd_tenant_id%3D%3Dccf2139b-7435-426b-b4d2-b917392d9540", "");
+        customAttributes.put("cd_tenant_id%3D%3D27598f0b-3696-4d04-81f3-76f89b032d7d", "");
+
         CreateAccountRequestDTO createAccountRequestDTO = CreateAccountRequestDTO.builder()
                 .emailAddress(email_address)
                 .name(name)
                 .quotaMax(10)
                 .externalAccountId(DEFAULT_ACCOUNT_ID)
+                .customAttributes(customAttributes)
                 .build();
 
 
@@ -33,6 +41,7 @@ public class CreateAccountRequestDTOTest {
         assertEquals(name, createAccountRequestDTO.getName(), "Invalid Name");
         assertEquals(10, createAccountRequestDTO.getQuotaMax(), "Invalid quota" );
         assertEquals(DEFAULT_ACCOUNT_ID, createAccountRequestDTO.getExternalAccountId(), "Invalid ExternalAccountId");
+        assertEquals(customAttributes, createAccountRequestDTO.getCustomAttributes(), "Invalid Custom Attributes Map");
         assertNotNull(createAccountRequestDTO.toString());
     }
 

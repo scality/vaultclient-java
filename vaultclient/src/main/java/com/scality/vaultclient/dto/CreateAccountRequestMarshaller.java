@@ -5,6 +5,7 @@ import com.amazonaws.protocol.MarshallingInfo;
 import com.amazonaws.protocol.MarshallingType;
 import com.amazonaws.protocol.ProtocolRequestMarshaller;
 import com.amazonaws.util.StringUtils;
+import com.google.gson.Gson;
 import com.scality.vaultclient.services.VaultClientException;
 
 /**
@@ -20,6 +21,8 @@ public class CreateAccountRequestMarshaller extends GenericRequestMarshaller<Cre
             .marshallLocationName("quotaMax").build();
     private static final MarshallingInfo<String> EXTERNALACCOUNTID_BINDING = MarshallingInfo.builder(MarshallingType.STRING).marshallLocation(MarshallLocation.PAYLOAD)
             .marshallLocationName("externalAccountId").build();
+    private static final MarshallingInfo<String> CUSTOM_ATTRIBUTES_BINDING = MarshallingInfo.builder(MarshallingType.JSON_VALUE).marshallLocation(MarshallLocation.PAYLOAD)
+            .marshallLocationName("customAttributes").build();
     private static final String CREATE_ACCOUNT_ACTION = "CreateAccount";
 
     private static final CreateAccountRequestMarshaller instance = new CreateAccountRequestMarshaller();
@@ -62,6 +65,11 @@ public class CreateAccountRequestMarshaller extends GenericRequestMarshaller<Cre
                     throw new VaultClientException("invalid account id supplied.");
                 }
                 protocolMarshaller.marshall(createAccountRequestDTO.getExternalAccountId(), EXTERNALACCOUNTID_BINDING);
+            }
+
+            if (createAccountRequestDTO.getCustomAttributes()!=null
+                    && !createAccountRequestDTO.getCustomAttributes().isEmpty()) {
+                protocolMarshaller.marshall(new Gson().toJson(createAccountRequestDTO.getCustomAttributes()), CUSTOM_ATTRIBUTES_BINDING);
             }
         } catch (Exception e) {
             throw new VaultClientException("Unable to marshall request to JSON: " + e.getMessage(), e);
