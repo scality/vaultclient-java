@@ -43,8 +43,8 @@ public class ListAccountsRequestMarshaller extends GenericRequestMarshaller<List
         super.marshall(listAccountsRequestDTO, protocolMarshaller, LIST_ACCOUNTS_ACTION);
 
         try {
-            if (listAccountsRequestDTO.getMaxItems() < 0 || listAccountsRequestDTO.getMaxItems() > 1000) {
-                throw new VaultClientException("maxItems need to be a value between 1 and 1000 included");
+            if (listAccountsRequestDTO.getMaxItems() < 0) {
+                throw new VaultClientException("invalid maxItems supplied");
             } else if (listAccountsRequestDTO.getMaxItems() > 0) {
                 protocolMarshaller.marshall(listAccountsRequestDTO.getMaxItems(), MAX_ITEMS_BINDING);
             }
