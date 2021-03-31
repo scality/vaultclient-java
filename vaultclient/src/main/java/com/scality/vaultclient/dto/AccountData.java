@@ -15,6 +15,7 @@ public class AccountData implements Serializable {
     String emailAddress;
     String id;
     int quotaMax;
+    int quota; // This will show up only in list accounts response
     Date createDate;
     String canonicalId;
     List<String> aliasList;
