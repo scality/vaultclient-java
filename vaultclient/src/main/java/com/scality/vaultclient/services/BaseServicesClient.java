@@ -43,6 +43,7 @@ import java.util.List;
  * Responsible for basic and common client capabilities that are the same across all Vault
  * SDK Java clients (ex: setting the client endpoint, invoking the Service API).
  */
+@SuppressWarnings("unchecked")
 public abstract class BaseServicesClient extends AmazonWebServiceClient{
     /**
      * Constructs a new client to invoke service methods on IAM. A credentials provider chain will be used that searches
@@ -251,7 +252,24 @@ public abstract class BaseServicesClient extends AmazonWebServiceClient{
      * @param requestMarshaller     the requestMarshaller
      * @return the AWS response wrapper
      */
-    public <T extends AmazonWebServiceRequest,R> Response<R> execute(T requestDTO, Class<R> responseClassType, String operationName, GenericRequestMarshaller requestMarshaller) {
+    public <T extends AmazonWebServiceRequest,R> Response<R> execute(T requestDTO, String operationName, GenericRequestMarshaller requestMarshaller, Class<R> responseClassType) {
+
+        return execute(requestDTO, operationName, requestMarshaller, new GenericResponseJsonUnmarshaller<R>(responseClassType));
+    }
+
+    /**
+     * Execute the Vault service.
+     *
+     * @param <T>               the AmazonWebServiceRequest type parameter
+     * @param <R>               the response DTO type parameter
+     * @param requestDTO        the request dto
+     * @param operationName     the operation name
+     * @param requestMarshaller     the requestMarshaller
+     * @param unmarshaller     the response unmarshaller
+     * @return the AWS response wrapper
+     */
+    public <T extends AmazonWebServiceRequest,R> Response<R> execute(T requestDTO, String operationName,
+                                                                     GenericRequestMarshaller requestMarshaller, Unmarshaller unmarshaller) {
 
         ExecutionContext executionContext = createExecutionContext(requestDTO);
 
@@ -264,7 +282,7 @@ public abstract class BaseServicesClient extends AmazonWebServiceClient{
         request.addHandlerContext(HandlerContextKey.ADVANCED_CONFIG, getAdvancedConfig());
 
         HttpResponseHandler<AmazonWebServiceResponse<R>> responseHandler = protocolFactory.createResponseHandler(
-                new JsonOperationMetadata().withPayloadJson(true).withHasStreamingSuccessResponse(true), new GenericResponseJsonUnmarshaller<R>(responseClassType));
+                new JsonOperationMetadata().withPayloadJson(true).withHasStreamingSuccessResponse(true), unmarshaller);
 
         return invoke(request, responseHandler, executionContext);
     }
