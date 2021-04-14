@@ -4,6 +4,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     implementation 'com.amazonaws:aws-java-sdk-s3:1.11.914'
+    implementation 'com.amazonaws:aws-java-sdk-sts:1.11.914'
     testImplementation 'org.mockito:mockito-core:2.7.22'
     implementation 'com.google.code.gson:gson:2.8.6'
 }
@@ -13,7 +14,7 @@ test {
 }
 
 group 'com.scality'
-version '0.2.0-SNAPSHOT'
+version '0.3.0-SNAPSHOT'
 artifacts {
     archives jar
 }
@@ -22,7 +23,7 @@ publishing {
         mavenJava(MavenPublication) {
             groupId 'com.scality'
             artifactId 'vaultclient'
-            version '0.2.0-SNAPSHOT'
+            version '0.3.0-SNAPSHOT'
 
             from components.java
 
