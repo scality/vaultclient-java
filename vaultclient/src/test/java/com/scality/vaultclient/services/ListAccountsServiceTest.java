@@ -268,9 +268,9 @@ public class ListAccountsServiceTest {
     @Test
     @SuppressWarnings( "deprecation" )
     public void testListAccountsWithActualVault() {
-        //"D4IT2AWSB588GO5J9T00": "UEEu8tYlsOGGrgf4DAiSZD6apVNPUWqRiPG0nTB6"
+        // These are default vault admin keys. Ref: https://github.com/scality/Vault/blob/development/7.10/tests/utils/admincredentials.json
         AccountServicesClient amazonIdentityManagementClient = new AccountServicesClient(
-                new BasicAWSCredentials("D4IT2AWSB588GO5J9T00", "UEEu8tYlsOGGrgf4DAiSZD6apVNPUWqRiPG0nTB6"));
+                new BasicAWSCredentials(DEFAULT_VAULT_ADMIN_AK, DEFAULT_VAULT_ADMIN_SK));
 
         amazonIdentityManagementClient.setEndpoint("http://localhost:8600");
 

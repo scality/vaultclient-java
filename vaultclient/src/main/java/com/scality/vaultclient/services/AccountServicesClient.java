@@ -6,15 +6,7 @@ import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.client.AwsSyncClientParams;
 import com.amazonaws.http.AmazonHttpClient;
-import com.scality.vaultclient.dto.CreateAccountRequestDTO;
-import com.scality.vaultclient.dto.CreateAccountRequestMarshaller;
-import com.scality.vaultclient.dto.CreateAccountResponseDTO;
-import com.scality.vaultclient.dto.GenerateAccountAccessKeyRequest;
-import com.scality.vaultclient.dto.GenerateAccountAccessKeyRequestMarshaller;
-import com.scality.vaultclient.dto.GenerateAccountAccessKeyResponse;
-import com.scality.vaultclient.dto.ListAccountsRequestDTO;
-import com.scality.vaultclient.dto.ListAccountsRequestMarshaller;
-import com.scality.vaultclient.dto.ListAccountsResponseDTO;
+import com.scality.vaultclient.dto.*;
 
 /**
  * Account Services Java client.
@@ -33,6 +25,13 @@ public class AccountServicesClient extends BaseServicesClient implements Account
     public Response<ListAccountsResponseDTO> listAccounts(ListAccountsRequestDTO listAccountsRequestDTO) {
 
         return execute(listAccountsRequestDTO, "ListAccounts", ListAccountsRequestMarshaller.getInstance(), ListAccountsResponseDTO.class );
+    }
+
+    @Override
+    public Response<AccountData> getAccount(GetAccountRequestDTO getAccountRequestDTO) {
+
+        return execute(getAccountRequestDTO, "GetAccount",
+                GetAccountRequestMarshaller.getInstance(), AccountData.class );
     }
 
     @Override

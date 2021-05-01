@@ -1,12 +1,7 @@
 package com.scality.vaultclient.services;
 
 import com.amazonaws.Response;
-import com.scality.vaultclient.dto.CreateAccountRequestDTO;
-import com.scality.vaultclient.dto.CreateAccountResponseDTO;
-import com.scality.vaultclient.dto.GenerateAccountAccessKeyRequest;
-import com.scality.vaultclient.dto.GenerateAccountAccessKeyResponse;
-import com.scality.vaultclient.dto.ListAccountsRequestDTO;
-import com.scality.vaultclient.dto.ListAccountsResponseDTO;
+import com.scality.vaultclient.dto.*;
 
 public interface AccountServices {
     /**
@@ -24,6 +19,14 @@ public interface AccountServices {
      * @return the List Accounts response
      */
     Response<ListAccountsResponseDTO> listAccounts(ListAccountsRequestDTO listAccountsRequestDTO);
+
+    /**
+     * Get account.
+     *
+     * @param getAccountRequestDTO the get account request dto
+     * @return the Get Account response
+     */
+    Response<AccountData> getAccount(GetAccountRequestDTO getAccountRequestDTO);
 
     /**
      * List accounts.

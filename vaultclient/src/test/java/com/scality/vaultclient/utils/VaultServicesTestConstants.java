@@ -43,4 +43,7 @@ public final class VaultServicesTestConstants {
     public static final String ERR_INVALID_FILTERKEY_RESPONSE = "Invalid response for filterKey";
     public static final String ERR_INVALID_FILTERKEYSTARTSWITH_RESPONSE = "Invalid response for filterKeyStartsWith";
     public static final String ERR_INVALID_ACCOUNT_COUNT = "Invalid Accounts count";
+
+    public static final String DEFAULT_VAULT_ADMIN_AK = "D4IT2AWSB588GO5J9T00";
+    public static final String DEFAULT_VAULT_ADMIN_SK = "UEEu8tYlsOGGrgf4DAiSZD6apVNPUWqRiPG0nTB6";
 }
