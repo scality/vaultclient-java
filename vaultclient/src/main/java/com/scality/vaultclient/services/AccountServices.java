@@ -13,6 +13,14 @@ public interface AccountServices {
     Response<CreateAccountResponseDTO> createAccount(CreateAccountRequestDTO createAccountRequestDTO);
 
     /**
+     * Update an account.
+     *
+     * @param updateAccountAttributesRequestDTO the update account attributes request dto
+     * @return the Create Account response
+     */
+    Response<CreateAccountResponseDTO> updateAccountAttributes(UpdateAccountAttributesRequestDTO updateAccountAttributesRequestDTO);
+
+    /**
      * List accounts.
      *
      * @param listAccountsRequestDTO the list accounts request dto

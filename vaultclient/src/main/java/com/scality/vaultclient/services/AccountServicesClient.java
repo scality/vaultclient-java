@@ -22,6 +22,12 @@ public class AccountServicesClient extends BaseServicesClient implements Account
     }
 
     @Override
+    public Response<CreateAccountResponseDTO> updateAccountAttributes(UpdateAccountAttributesRequestDTO updateAccountAttributesRequestDTO) {
+
+        return execute(updateAccountAttributesRequestDTO, "UpdateAccountAttributes", UpdateAccountAttributesRequestMarshaller.getInstance(), CreateAccountResponseDTO.class );
+    }
+
+    @Override
     public Response<ListAccountsResponseDTO> listAccounts(ListAccountsRequestDTO listAccountsRequestDTO) {
 
         return execute(listAccountsRequestDTO, "ListAccounts", ListAccountsRequestMarshaller.getInstance(), ListAccountsResponseDTO.class );

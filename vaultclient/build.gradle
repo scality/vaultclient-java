@@ -14,7 +14,7 @@ test {
 }
 
 group 'com.scality'
-version '0.3.0-SNAPSHOT'
+version '0.4.0-SNAPSHOT'
 artifacts {
     archives jar
 }
@@ -23,7 +23,7 @@ publishing {
         mavenJava(MavenPublication) {
             groupId 'com.scality'
             artifactId 'vaultclient'
-            version '0.3.0-SNAPSHOT'
+            version '0.4.0-SNAPSHOT'
 
             from components.java
 
