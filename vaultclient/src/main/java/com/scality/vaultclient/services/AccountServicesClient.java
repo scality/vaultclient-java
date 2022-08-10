@@ -122,4 +122,9 @@ public class AccountServicesClient extends BaseServicesClient implements Account
     public AccountServicesClient(AmazonHttpClient client, AWSCredentials awsCredentials) {
         super(client, awsCredentials);
     }
+
+    @Override
+    public Response<GetUserByAccessKeyResponseDTO> getUserByAccessKey(GetUserByAccessKeyRequestDTO getUserByAccessKeyRequestDTO) {
+        return execute(getUserByAccessKeyRequestDTO, "GetUserByAccessKey", GetUserByAccessKeyRequestMarshaller.getInstance(), GetUserByAccessKeyResponseDTO.class );
+    }
 }

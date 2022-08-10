@@ -37,10 +37,19 @@ public interface AccountServices {
     Response<AccountData> getAccount(GetAccountRequestDTO getAccountRequestDTO);
 
     /**
-     * List accounts.
+     * generate account access key.
      *
      * @param generateAccountAccessKeyRequest the generate account access key request dto
      * @return the Generate Account Access Key response
      */
     Response<GenerateAccountAccessKeyResponse> generateAccountAccessKey(GenerateAccountAccessKeyRequest generateAccountAccessKeyRequest);
+
+    /**
+     * Get User By accessKey.
+     *
+     * @param getUserByAccessKeyRequestDTO the Get User by AccessKey request dto
+     * @return the Get User by AccessKey response
+     */
+    Response<GetUserByAccessKeyResponseDTO> getUserByAccessKey(GetUserByAccessKeyRequestDTO getUserByAccessKeyRequestDTO);
+
 }
