@@ -3,14 +3,14 @@ package com.scality.vaultclient.utils;
 public final class VaultServicesTestConstants {
 
     public static final String DEFAULT_ACCOUNT_ID = "123123123123";
-    public static final String DEFAULT_ARN_STR = "\"arn:aws:iam::123123123123:/";
+    public static final String DEFAULT_ARN_STR = "arn:aws:iam::123123123123:/";
     public static final String DEFAULT_CANONICAL_ID = "31e38bcfda3ab1887587669ee25a348cc89e6e2e87dc38088289b1b3c5329b30";
     public static final String DEFAULT_ACCOUNT_NAME = "Account5425";
     public static final String DEFAULT_EMAIL_ADDR = "xyz@scality.com";
 
     public static final String DEFAULT_USER_ID = "456456456456";
     public static final String DEFAULT_USER_NAME = "User456";
-    public static final String DEFAULT_USER_ARN_STR = "\"arn:aws:iam::123123123123:user/User456";
+    public static final String DEFAULT_USER_ARN_STR = "arn:aws:iam::123123123123:user/User456";
     public static final String DEFAULT_USER_EMAIL_ADDR = "User456@scality.com";
 
     public static final int DEFAULT_LIST_ACCOUNTS_COUNT = 10;

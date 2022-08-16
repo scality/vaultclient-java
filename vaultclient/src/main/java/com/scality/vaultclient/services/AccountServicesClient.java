@@ -125,6 +125,6 @@ public class AccountServicesClient extends BaseServicesClient implements Account
 
     @Override
     public Response<GetUserByAccessKeyResponseDTO> getUserByAccessKey(GetUserByAccessKeyRequestDTO getUserByAccessKeyRequestDTO) {
-        return execute(getUserByAccessKeyRequestDTO, "GetUserByAccessKey", GetUserByAccessKeyRequestMarshaller.getInstance(), GetUserByAccessKeyResponseDTO.class );
+        return execute(getUserByAccessKeyRequestDTO, "GetUserByAccessKey", GetUserByAccessKeyRequestMarshaller.getInstance(), GetUserByAccessKeyResponseDTO.class);
     }
 }
