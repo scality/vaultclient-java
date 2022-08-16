@@ -14,19 +14,21 @@ test {
 }
 
 group 'com.scality'
-version '0.5.0-SNAPSHOT'
+version '0.5.0'
+if (!project.hasProperty('release')) {
+    project.setVersion(project.getVersion() + '-SNAPSHOT')
+}
 artifacts {
     archives jar
 }
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
             groupId 'com.scality'
             artifactId 'vaultclient'
-            version '0.5.0-SNAPSHOT'
 
             from components.java
-
         }
     }
 

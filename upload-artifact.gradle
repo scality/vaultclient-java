@@ -1,5 +1,35 @@
 apply plugin: 'com.bmuschko.nexus'
 apply plugin: 'signing'
+
+modifyPom {
+    project {
+        name "com.scality:vaultclient-java"
+        description "com.scality:vaultclient-java"
+        url 'https://github.com/scality/vaultclient-java'
+
+        scm {
+            connection 'scm:git:git://github.com/scality/vaultclient-java.git'
+            developerConnection 'scm:git:ssh://github.com:scality/vaultclient-java.git'
+            url 'https://github.com/scality/vaultclient-java/tree/development/1.0'
+        }
+
+        licenses {
+            license {
+                name 'The Apache Software License, Version 2.0'
+                url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+            }
+        }
+
+        developers {
+            developer {
+                id 'scality.com'
+                name 'scality.com'
+                email 'scality@scality.com'
+            }
+        }
+    }
+}
+
 nexus {
     sign = true
     repositoryUrl = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
