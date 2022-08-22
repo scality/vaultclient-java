@@ -13,11 +13,6 @@ test {
     useJUnitPlatform()
 }
 
-group 'com.scality'
-version '0.5.0'
-if (!project.hasProperty('release')) {
-    project.setVersion(project.getVersion() + '-SNAPSHOT')
-}
 artifacts {
     archives jar
 }
