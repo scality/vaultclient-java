@@ -10,7 +10,7 @@ modifyPom {
         scm {
             connection 'scm:git:git://github.com/scality/vaultclient-java.git'
             developerConnection 'scm:git:ssh://github.com:scality/vaultclient-java.git'
-            url 'https://github.com/scality/vaultclient-java/tree/development/1.0'
+            url 'https://github.com/scality/vaultclient-java/tree/main'
         }
 
         licenses {
