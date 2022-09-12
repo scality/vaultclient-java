@@ -47,3 +47,7 @@ jobs:
       - name: Gradle Upload Archives to Releases Repository
         if: ${{ inputs.release }}
         run: gradle uploadArchives -Prelease -Psigning.secretKeyRingFile=$GITHUB_WORKSPACE/secring.gpg -PnexusUsername=$NEXUS_UNAME -PnexusPassword=$NEXUS_PWD -Psigning.keyId=$SIGNING_KEYID -Psigning.password=$SIGNING_PWD
+
+      - name: Gradle Publish Release to Nexus
+        if: ${{ inputs.release }}
+        run: ./gradlew closeAndReleaseRepository -Psigning.secretKeyRingFile=$GITHUB_WORKSPACE/secring.gpg -PnexusUsername=$NEXUS_UNAME -PnexusPassword=$NEXUS_PWD -Psigning.keyId=$SIGNING_KEYID -Psigning.password=$SIGNING_PWD

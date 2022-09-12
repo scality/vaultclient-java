@@ -23,36 +23,16 @@ if the version specified is not the one you want to release, then make a PR to u
 2. Run release workflow in the [github actions release page](https://github.com/scality/vaultclient-java/actions/workflows/release.yml).
 
 
-3. Once the release workflow is complete successfully, proceed to Nexus Repository Manager to manually release the project.
-   > We are doing this as currently OSIS and vaultlcient-java share the same namespace and to automate closing and 
-   > releasesing all previous versions should be closed and released. Will be improved in the future. 
-   
-    Nexus Repo link: https://oss.sonatype.org
-
-    For login credentials, they are stored in github secrets or can be obtained by emailing Object Squad <object-squad@scality.com>
+3. Once the release workflow has successfully completed, proceed to Nexus Repository Manager to check if the released package is present.
     
-   
+   > Nexus Repo link: https://oss.sonatype.org/#nexus-search;quick~com.scality
+   > 
+   > For login credentials, they are stored in github secrets or can be obtained by emailing Object Squad <object-squad@scality.com>
+    
+4. If the release workflow fails at ``Gradle Publish Release to Nexus`` step, and raises error `Wrong number of received repositories in state 'open'. Expected 1, received 2`.
 
-4. Go to [Staging Repositories](https://oss.sonatype.org/#stagingRepositories), 
-find the latest record which should correspond to the github action release workflow time
-   
-   ![](./pictures/staging-repositories.png)
+   > It's because that there are old packages in staging repositories from this project or OSIS project that has not yet been closed. Gradle expects to have only one package in staging repositories that is waiting to be released.
+   > 
+   > Please proceed to [Nexus Stating Repositories](https://oss.sonatype.org/#stagingRepositories) and drop 
+   > all the open staging repositories. Then, re-run the github action release workflow. 
 
-
-5. Click **Close** button, fill in **Description** and click **Confirm** to start the Close process.
-
-   ![](./pictures/close-confirmation.png)
-
-
-6. Once Close process is complete successfully, you should be able to see the status of 
-this record is closed and the **Release** button is active.
-
-   ![](./pictures/staging-repositories-2.png)
-
-
-7. Click **Release** button, fill in **Description** and click ***Confirm** to start the Release process.
-
-   ![](./pictures/release-confirmation.png)
-
-
-8. Once Release process is complete successfully, you should be able to see this new released package in [Nexus](https://oss.sonatype.org/#nexus-search;quick~vaultclient).
