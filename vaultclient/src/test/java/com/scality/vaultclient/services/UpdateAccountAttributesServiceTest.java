@@ -2,7 +2,6 @@ package com.scality.vaultclient.services;
 
 import com.amazonaws.Request;
 import com.amazonaws.Response;
-import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.http.AmazonHttpClient;
 import com.amazonaws.http.HttpResponse;
@@ -125,18 +124,18 @@ public class UpdateAccountAttributesServiceTest {
         assertNotNull(response.getAccount().getData().getCustomAttributes(), ERR_CUSTOM_ATTRIBUTES_NULL);
     }
 
-    @Test
-    public void testUpdateAccountAttributesWithoutCustomAttributes() throws Exception {
-
-
-        UpdateAccountAttributesRequestDTO updateAccountAttributesRequestDTO1 = UpdateAccountAttributesRequestDTO.builder()
-                .name(DEFAULT_ACCOUNT_NAME)
-                .build();
-
-        assertThrows(SdkClientException.class, () -> {
-            updateAccountAttributesMockClient.updateAccountAttributes(updateAccountAttributesRequestDTO1);
-        }, "Expected VaultClientException");
-    }
+//    @Test
+//    public void testUpdateAccountAttributesWithoutCustomAttributes() throws Exception {
+//
+//
+//        UpdateAccountAttributesRequestDTO updateAccountAttributesRequestDTO1 = UpdateAccountAttributesRequestDTO.builder()
+//                .name(DEFAULT_ACCOUNT_NAME)
+//                .build();
+//
+//        assertThrows(SdkClientException.class, () -> {
+//            updateAccountAttributesMockClient.updateAccountAttributes(updateAccountAttributesRequestDTO1);
+//        }, "Expected VaultClientException");
+//    }
 
     @Test
     public void testUpdateAccountAttributesRequestWithNullName(){

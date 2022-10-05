@@ -43,12 +43,12 @@ public class UpdateAccountAttributesRequestMarshaller extends GenericRequestMars
         try {
             protocolMarshaller.marshall(updateAccountAttributesRequestDTO.getName(), NAME_BINDING);
 
-            if (updateAccountAttributesRequestDTO.getCustomAttributes()!=null
-                    && !updateAccountAttributesRequestDTO.getCustomAttributes().isEmpty()) {
-                protocolMarshaller.marshall(new Gson().toJson(updateAccountAttributesRequestDTO.getCustomAttributes()), CUSTOM_ATTRIBUTES_BINDING);
-            } else {
-                throw new VaultClientException("CustomAttributes is required in Update Account Attributes.");
-            }
+//            if (updateAccountAttributesRequestDTO.getCustomAttributes()!=null
+//                    && !updateAccountAttributesRequestDTO.getCustomAttributes().isEmpty()) {
+            protocolMarshaller.marshall(new Gson().toJson(updateAccountAttributesRequestDTO.getCustomAttributes()), CUSTOM_ATTRIBUTES_BINDING);
+//            } else {
+//                throw new VaultClientException("CustomAttributes is required in Update Account Attributes.");
+//            }
         } catch (Exception e) {
             throw new VaultClientException("Unable to marshall request to JSON: " + e.getMessage(), e);
         }

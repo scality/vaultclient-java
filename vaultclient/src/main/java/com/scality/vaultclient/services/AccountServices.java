@@ -21,6 +21,15 @@ public interface AccountServices {
     Response<CreateAccountResponseDTO> updateAccountAttributes(UpdateAccountAttributesRequestDTO updateAccountAttributesRequestDTO);
 
     /**
+     * Update an account.
+     *
+     * @param addAccountAttributesRequestDTO the add account attributes request dto
+     * @return the Create Account response
+     */
+    Response<CreateAccountResponseDTO> addAccountAttributes(AddAccountAttributesRequestDTO addAccountAttributesRequestDTO);
+
+
+    /**
      * List accounts.
      *
      * @param listAccountsRequestDTO the list accounts request dto
