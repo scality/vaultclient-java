@@ -25,7 +25,7 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class GetAccountServiceTest {
+class GetAccountServiceTest {
 
     // mock vault client
     protected static AmazonHttpClient getAccountAmazonHttpClient;
@@ -88,7 +88,7 @@ public class GetAccountServiceTest {
 
     /** Get AccountData Test cases **/
     @Test
-    public void testGetAccountWithAccountId() throws Exception {
+    void testGetAccountWithAccountId() throws Exception {
         GetAccountRequestDTO getAccountRequestDTO = GetAccountRequestDTO.builder()
                 .accountId(DEFAULT_ACCOUNT_ID)
                 .build();
@@ -105,7 +105,7 @@ public class GetAccountServiceTest {
     }
 
     @Test
-    public void testGetAccountWithEmail() throws Exception {
+    void testGetAccountWithEmail() throws Exception {
         GetAccountRequestDTO getAccountRequestDTO = GetAccountRequestDTO.builder()
                 .emailAddress(DEFAULT_EMAIL_ADDR)
                 .build();
@@ -122,7 +122,7 @@ public class GetAccountServiceTest {
     }
 
     @Test
-    public void testGetAccountWithAccountArn() throws Exception {
+    void testGetAccountWithAccountArn() throws Exception {
         final String accountArn = DEFAULT_ARN_STR + DEFAULT_ACCOUNT_NAME +"/\"";
 
         GetAccountRequestDTO getAccountRequestDTO = GetAccountRequestDTO.builder()
@@ -141,7 +141,7 @@ public class GetAccountServiceTest {
     }
 
     @Test
-    public void testGetAccountWithCanonicalID() throws Exception {
+    void testGetAccountWithCanonicalID() throws Exception {
         GetAccountRequestDTO getAccountRequestDTO = GetAccountRequestDTO.builder()
                 .canonicalId(DEFAULT_CANONICAL_ID)
                 .build();
@@ -158,7 +158,7 @@ public class GetAccountServiceTest {
     }
 
     @Test
-    public void testGetAccountWithAccountName() throws Exception {
+    void testGetAccountWithAccountName() throws Exception {
         GetAccountRequestDTO getAccountRequestDTO = GetAccountRequestDTO.builder()
                 .accountName(DEFAULT_ACCOUNT_NAME)
                 .build();
@@ -175,7 +175,7 @@ public class GetAccountServiceTest {
     }
 
     @Test
-    public void testGetAccountWithCredentials() throws Exception {
+    void testGetAccountWithCredentials() throws Exception {
         GetAccountRequestDTO getAccountRequestDTO = GetAccountRequestDTO.builder()
                 .accountName(DEFAULT_ACCOUNT_NAME)
                 .build();
@@ -194,7 +194,7 @@ public class GetAccountServiceTest {
     }
 
     @Test
-    public void testGetAccountWithInvalidRequest(){
+    void testGetAccountWithInvalidRequest(){
         GetAccountRequestDTO getAccountRequestDTO = GetAccountRequestDTO.builder().build();
 
         assertThrows(SdkClientException.class, () -> {
@@ -203,7 +203,7 @@ public class GetAccountServiceTest {
     }
 
     @Test
-    public void testGetAccountWithInvalidRequest2(){
+    void testGetAccountWithInvalidRequest2(){
         GetAccountRequestDTO getAccountRequestDTO = GetAccountRequestDTO.builder()
                                                     .accountName(DEFAULT_ACCOUNT_NAME)
                                                     .accountArn(DEFAULT_ARN_STR)
@@ -218,7 +218,7 @@ public class GetAccountServiceTest {
     @Disabled
     @Test
     @SuppressWarnings( "deprecation" )
-    public void testGetAccountWithActualVault() {
+    void testGetAccountWithActualVault() {
         //"D4IT2AWSB588GO5J9T00": "UEEu8tYlsOGGrgf4DAiSZD6apVNPUWqRiPG0nTB6"
         AccountServicesClient amazonIdentityManagementClient = new AccountServicesClient(
                 new BasicAWSCredentials("D4IT2AWSB588GO5J9T00", "UEEu8tYlsOGGrgf4DAiSZD6apVNPUWqRiPG0nTB6"));

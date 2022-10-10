@@ -27,7 +27,7 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class AssumeRoleBackbeatServiceTest {
+class AssumeRoleBackbeatServiceTest {
 
     // mock vault client
     protected static AmazonHttpClient amazonHttpClient;
@@ -78,7 +78,7 @@ public class AssumeRoleBackbeatServiceTest {
     }
 
     @Test
-    public void testAssumeRoleBackbeat() {
+    void testAssumeRoleBackbeat() {
 
         AssumeRoleResult response = securityTokenServicesClientMock.assumeRoleBackbeat(defaultAssumeRoleRequest).getAwsResponse();
 
@@ -91,7 +91,7 @@ public class AssumeRoleBackbeatServiceTest {
     }
 
     @Test
-    public void testAssumeRoleBackbeatWithCredentials() {
+    void testAssumeRoleBackbeatWithCredentials() {
 
         securityTokenServicesClient = new SecurityTokenServicesClient(amazonHttpClient, basicAWSCredentials);
         AssumeRoleResult response = securityTokenServicesClient.assumeRoleBackbeat(defaultAssumeRoleRequest).getAwsResponse();
@@ -106,7 +106,7 @@ public class AssumeRoleBackbeatServiceTest {
     }
 
     @Test
-    public void testAssumeRoleBackbeatInvalidRoleARN(){
+    void testAssumeRoleBackbeatInvalidRoleARN(){
         AssumeRoleRequest assumeRoleRequest = new AssumeRoleRequest();
         assumeRoleRequest.setRoleSessionName(TEST_SESSION_NAME);
 
@@ -114,7 +114,7 @@ public class AssumeRoleBackbeatServiceTest {
     }
 
     @Test
-    public void testAssumeRoleBackbeatInvalidRoleSessionName(){
+    void testAssumeRoleBackbeatInvalidRoleSessionName(){
         AssumeRoleRequest assumeRoleRequest = new AssumeRoleRequest();
         assumeRoleRequest.setRoleArn(TEST_ROLE_ARN);
 
@@ -125,7 +125,7 @@ public class AssumeRoleBackbeatServiceTest {
     @Disabled
     @Test
     @SuppressWarnings( "deprecation" )
-    public void testAssumeRoleBackbeatWithActualVault() {
+    void testAssumeRoleBackbeatWithActualVault() {
         //"D4IT2AWSB588GO5J9T00": "UEEu8tYlsOGGrgf4DAiSZD6apVNPUWqRiPG0nTB6"
         SecurityTokenServicesClient amazonIdentityManagementClient = new SecurityTokenServicesClient(
                 new BasicAWSCredentials("D4IT2AWSB588GO5J9T00", "UEEu8tYlsOGGrgf4DAiSZD6apVNPUWqRiPG0nTB6"));

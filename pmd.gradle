@@ -1,4 +1,5 @@
 apply plugin: 'pmd'
+
 pmdMain {
     source ='src/main/java'
     reports {
@@ -16,8 +17,8 @@ pmdTest {
 
 pmd {
     consoleOutput = true
-    toolVersion = "6.30.0"
-    rulePriority = 5
+    toolVersion = "6.50.0"
+    rulesMinimumPriority = 5
     ignoreFailures = false
     reportsDir = file("$rootDir/reports/pmd-lint")
     ruleSetFiles = files("$rootDir/pmd-rules.xml")
