@@ -1,11 +1,11 @@
 dependencies {
-    implementation 'org.projectlombok:lombok:1.18.16'
-    annotationProcessor 'org.projectlombok:lombok:1.18.16'
+    implementation 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     implementation 'com.amazonaws:aws-java-sdk-s3:1.11.914'
     implementation 'com.amazonaws:aws-java-sdk-sts:1.11.914'
-    testImplementation 'org.mockito:mockito-core:2.7.22'
+    testImplementation 'org.mockito:mockito-core:4.8.0'
     implementation 'com.google.code.gson:gson:2.8.6'
 }
 
