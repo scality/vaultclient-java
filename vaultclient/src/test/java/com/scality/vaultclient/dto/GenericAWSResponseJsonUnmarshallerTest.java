@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 import static com.scality.vaultclient.utils.VaultServicesTestConstants.TEST_ACCESS_KEY;
@@ -48,7 +49,7 @@ class GenericAWSResponseJsonUnmarshallerTest {
 
         final HttpResponse httpResponseMock = mock(HttpResponse.class);
 
-        when(httpResponseMock.getContent()).thenReturn(new ByteArrayInputStream(inputString.getBytes(Charset.forName("UTF-8"))));
+        when(httpResponseMock.getContent()).thenReturn(new ByteArrayInputStream(inputString.getBytes(StandardCharsets.UTF_8)));
 
         when(contextMock.getHttpResponse()).thenReturn(httpResponseMock);
 
