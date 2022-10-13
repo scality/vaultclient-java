@@ -1,37 +1,65 @@
-apply plugin: 'com.bmuschko.nexus'
+apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
-modifyPom {
-    project {
-        name "com.scality:vaultclient-java"
-        description "com.scality:vaultclient-java"
-        url 'https://github.com/scality/vaultclient-java'
+publishing {
+    publications {
+        vaultClient(MavenPublication) {
+            from components.java
 
-        scm {
-            connection 'scm:git:git://github.com/scality/vaultclient-java.git'
-            developerConnection 'scm:git:ssh://github.com:scality/vaultclient-java.git'
-            url 'https://github.com/scality/vaultclient-java/tree/main'
-        }
-
-        licenses {
-            license {
-                name 'The Apache Software License, Version 2.0'
-                url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-            }
-        }
-
-        developers {
-            developer {
-                id 'scality.com'
-                name 'scality.com'
-                email 'scality@scality.com'
+            pom.name = 'com.scality:vaultclient-java'
+            pom.description = 'com.scality:vaultclient-java'
+            pom.url = 'https://github.com/scality/vaultclient-java'
+            pom {
+                licenses {
+                    license {
+                        name = 'The Apache Software License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'scality.com'
+                        name = 'scality.com'
+                        email = 'scality@scality.com'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/scality/vaultclient-java.git'
+                    developerConnection = 'scm:git:ssh://github.com:scality/vaultclient-java.git'
+                    url = 'https://github.com/scality/vaultclient-java/tree/main'
+                }
             }
         }
     }
+
+    repositories {
+        maven {
+            name = 'nexusSnapshots'
+            url = 'https://oss.sonatype.org/content/repositories/snapshots/'
+            credentials {
+                username nexusUsername
+                password nexusPassword
+            }
+        }
+        maven {
+            name = 'nexusRelease'
+            url = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+            credentials {
+                username nexusUsername
+                password nexusPassword
+            }
+        }
+        mavenLocal()
+    }
 }
 
-nexus {
-    sign = true
-    repositoryUrl = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
-    snapshotRepositoryUrl = 'https://oss.sonatype.org/content/repositories/snapshots/'
+// sign artifact (.asc files)
+signing {
+    sign publishing.publications.vaultClient
+}
+
+// publish source and javadoc
+java {
+    withSourcesJar()
+    withJavadocJar()
 }
