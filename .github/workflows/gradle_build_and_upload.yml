@@ -42,7 +42,7 @@ jobs:
 
       - name: Gradle Upload Archives to Snapshot Repository
         if: ${{ !inputs.release }}
-        run: ./gradlew publishVaultClientPublicationToNexusSnapshotsRepository -Psigning.secretKeyRingFile=$GITHUB_WORKSPACE/secring.gpg -PnexusUsername=$NEXUS_UNAME -PnexusPassword=$NEXUS_PWD -Psigning.keyId=$SIGNING_KEYID -Psigning.password=$SIGNING_PWD --debug
+        run: ./gradlew publishVaultClientPublicationToNexusSnapshotsRepository -Psigning.secretKeyRingFile=$GITHUB_WORKSPACE/secring.gpg -PnexusSnapshotsUsername=$NEXUS_UNAME -PnexusSnapshotsPassword=$NEXUS_PWD -Psigning.keyId=$SIGNING_KEYID -Psigning.password=$SIGNING_PWD --debug
 
       - name: Gradle Upload Archives to Releases Repository
         if: ${{ inputs.release }}
