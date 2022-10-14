@@ -36,7 +36,7 @@ publishing {
         maven {
             name = 'nexusSnapshots'
             url = 'https://oss.sonatype.org/content/repositories/snapshots/'
-//            credentials(PasswordCredentials)
+            credentials(PasswordCredentials)
         }
         maven {
             name = 'nexusRelease'
