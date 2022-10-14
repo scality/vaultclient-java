@@ -27,12 +27,12 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: "corretto"
-          java-version: "8"
+          java-version: "17"
 
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
         with:
-          gradle-version: 6.7.1
+          gradle-version: 7.3
 
       - name: Execute build with Gradle wrapper
         run: ./gradlew build
@@ -42,12 +42,8 @@ jobs:
 
       - name: Gradle Upload Archives to Snapshot Repository
         if: ${{ !inputs.release }}
-        run: gradle uploadArchives -Psigning.secretKeyRingFile=$GITHUB_WORKSPACE/secring.gpg -PnexusUsername=$NEXUS_UNAME -PnexusPassword=$NEXUS_PWD -Psigning.keyId=$SIGNING_KEYID -Psigning.password=$SIGNING_PWD
+        run: ./gradlew publishVaultClientPublicationToNexusSnapshotsRepository -Psigning.secretKeyRingFile=$GITHUB_WORKSPACE/secring.gpg -PnexusUsername=$NEXUS_UNAME -PnexusPassword=$NEXUS_PWD -Psigning.keyId=$SIGNING_KEYID -Psigning.password=$SIGNING_PWD
 
       - name: Gradle Upload Archives to Releases Repository
         if: ${{ inputs.release }}
-        run: gradle uploadArchives -Prelease -Psigning.secretKeyRingFile=$GITHUB_WORKSPACE/secring.gpg -PnexusUsername=$NEXUS_UNAME -PnexusPassword=$NEXUS_PWD -Psigning.keyId=$SIGNING_KEYID -Psigning.password=$SIGNING_PWD
-
-      - name: Gradle Publish Release to Nexus
-        if: ${{ inputs.release }}
-        run: ./gradlew closeAndReleaseRepository -Psigning.secretKeyRingFile=$GITHUB_WORKSPACE/secring.gpg -PnexusUsername=$NEXUS_UNAME -PnexusPassword=$NEXUS_PWD -Psigning.keyId=$SIGNING_KEYID -Psigning.password=$SIGNING_PWD
+        run: ./gradlew publishVaultClientPublicationToNexusReleaseRepository -Prelease -Psigning.secretKeyRingFile=$GITHUB_WORKSPACE/secring.gpg -PnexusUsername=$NEXUS_UNAME -PnexusPassword=$NEXUS_PWD -Psigning.keyId=$SIGNING_KEYID -Psigning.password=$SIGNING_PWD
