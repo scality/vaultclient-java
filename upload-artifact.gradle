@@ -3,12 +3,12 @@ apply plugin: 'signing'
 
 publishing {
     publications {
-        vaultClient(MavenPublication) {
+        sonatype(MavenPublication) {
             from components.java
 
-            pom.name = 'com.scality:vaultclient-java'
-            pom.description = 'com.scality:vaultclient-java'
-            pom.url = 'https://github.com/scality/vaultclient-java'
+            pom.name = 'com.scality:' + project.name
+            pom.description = 'com.scality:' + project.name
+            pom.url = 'https://github.com/scality/' + project.name
             pom {
                 licenses {
                     license {
@@ -36,12 +36,10 @@ publishing {
         maven {
             name = 'nexusSnapshots'
             url = 'https://oss.sonatype.org/content/repositories/snapshots/'
-            credentials(PasswordCredentials)
-        }
-        maven {
-            name = 'nexusRelease'
-            url = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
-            credentials(PasswordCredentials)
+            credentials {
+                username sonatypeUsername
+                password sonatypePassword
+            }
         }
         mavenLocal()
     }
@@ -49,7 +47,7 @@ publishing {
 
 // sign artifact (.asc files)
 signing {
-    sign publishing.publications.vaultClient
+    sign publishing.publications.sonatype
 }
 
 // publish source and javadoc
