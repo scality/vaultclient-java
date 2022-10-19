@@ -28,7 +28,7 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class CreateAccountServiceTest {
+class CreateAccountServiceTest {
 
     // mock vault client
     protected static AmazonHttpClient createAccountAmazonHttpClient;
@@ -103,7 +103,7 @@ public class CreateAccountServiceTest {
     }
 
     @Test
-    public void testCreateAccount() throws Exception {
+    void testCreateAccount() throws Exception {
 
         CreateAccountResponseDTO response = createAccountMockClient.createAccount(createAccountRequestDTO).getAwsResponse();
 
@@ -117,7 +117,7 @@ public class CreateAccountServiceTest {
     }
 
     @Test
-    public void testCreateAccountWithCredentials() throws Exception {
+    void testCreateAccountWithCredentials() throws Exception {
 
         accountServicesClient = new AccountServicesClient(createAccountAmazonHttpClient, basicAWSCredentials);
         CreateAccountResponseDTO response = accountServicesClient.createAccount(createAccountRequestDTO).getAwsResponse();
@@ -132,7 +132,7 @@ public class CreateAccountServiceTest {
     }
 
     @Test
-    public void testCreateAccountWithoutCustomAttributes() throws Exception {
+    void testCreateAccountWithoutCustomAttributes() throws Exception {
 
 
         CreateAccountRequestDTO createAccountRequestDTO1 = CreateAccountRequestDTO.builder()
@@ -153,7 +153,7 @@ public class CreateAccountServiceTest {
     }
 
     @Test
-    public void testCreateAccountWithQuota() throws Exception {
+    void testCreateAccountWithQuota() throws Exception {
 
         CreateAccountRequestDTO createAccountRequestDTO1 = CreateAccountRequestDTO.builder()
                 .emailAddress(DEFAULT_EMAIL_ADDR)
@@ -175,7 +175,7 @@ public class CreateAccountServiceTest {
     }
 
     @Test
-    public void testCreateAccountWithExtId() throws Exception {
+    void testCreateAccountWithExtId() throws Exception {
 
         CreateAccountRequestDTO createAccountRequestDTO2 = CreateAccountRequestDTO.builder()
                 .emailAddress(DEFAULT_EMAIL_ADDR)
@@ -196,7 +196,7 @@ public class CreateAccountServiceTest {
     }
 
     @Test
-    public void testCreateAccountRequestWithNullEmail(){
+    void testCreateAccountRequestWithNullEmail(){
 
         assertThrows(NullPointerException.class, () -> {
             CreateAccountRequestDTO.builder()
@@ -208,7 +208,7 @@ public class CreateAccountServiceTest {
     }
 
     @Test
-    public void testCreateAccountRequestWithNullName(){
+    void testCreateAccountRequestWithNullName(){
 
         assertThrows(NullPointerException.class, () -> {
             CreateAccountRequestDTO.builder()
@@ -220,7 +220,7 @@ public class CreateAccountServiceTest {
     }
 
     @Test
-    public void createAccountErrorExistingAccount() throws Exception {
+    void createAccountErrorExistingAccount() throws Exception {
 
         final String ENTITY_EXISTS_ERR = "The request was rejected because it attempted to create a resource that already exists.";
 
@@ -249,7 +249,7 @@ public class CreateAccountServiceTest {
     }
 
     @Test
-    public void testCreateAccountError400() throws Exception {
+    void testCreateAccountError400() throws Exception {
 
         when(createAccountAmazonHttpClient.execute(any(Request.class), any(), any(), any(),any()))
                 .thenAnswer(new Answer<Response>() {
@@ -281,7 +281,7 @@ public class CreateAccountServiceTest {
     @Disabled
     @Test
     @SuppressWarnings( "deprecation" )
-    public void testCreateAccountWithActualVault() {
+    void testCreateAccountWithActualVault() {
         //"D4IT2AWSB588GO5J9T00": "UEEu8tYlsOGGrgf4DAiSZD6apVNPUWqRiPG0nTB6"
         AccountServicesClient amazonIdentityManagementClient = new AccountServicesClient(
                 new BasicAWSCredentials("D4IT2AWSB588GO5J9T00", "UEEu8tYlsOGGrgf4DAiSZD6apVNPUWqRiPG0nTB6"));

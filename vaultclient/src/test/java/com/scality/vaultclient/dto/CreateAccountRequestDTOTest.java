@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 //@SuppressWarnings("ConstantConditions")
-public class CreateAccountRequestDTOTest {
+class CreateAccountRequestDTOTest {
 
     private static final String DEFAULT_ACCOUNT_ID = "001583654825";
 
@@ -19,7 +19,7 @@ public class CreateAccountRequestDTOTest {
     private static final String DEFAULT_EMAIL_ADDR = "xyz@scality.com";
 
     @Test
-    public void createAccountRequestValidation() throws Exception {
+    void createAccountRequestValidation() throws Exception {
 
         String email_address = DEFAULT_EMAIL_ADDR;
         String name = DEFAULT_ACCOUNT_NAME;
@@ -46,7 +46,7 @@ public class CreateAccountRequestDTOTest {
     }
 
     @Test
-    public void createAccountRequestWithNullEmail(){
+    void createAccountRequestWithNullEmail(){
 
         String email_address = DEFAULT_EMAIL_ADDR;
         String name = null;
@@ -61,7 +61,7 @@ public class CreateAccountRequestDTOTest {
     }
 
     @Test
-    public void createAccountRequestWithNullName(){
+    void createAccountRequestWithNullName(){
 
         String email_address = null;
         String name = DEFAULT_ACCOUNT_NAME;

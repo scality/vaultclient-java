@@ -17,7 +17,7 @@ import static com.scality.vaultclient.utils.VaultServicesTestConstants.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class GetUserByAccessKeyServiceTest {
+class GetUserByAccessKeyServiceTest {
 
     // mock vault client
     protected static AmazonHttpClient getUserByAccessKeyAmazonHttpClient;
@@ -63,7 +63,7 @@ public class GetUserByAccessKeyServiceTest {
 
     /** Get AccountData Test cases **/
     @Test
-    public void testGetUserByAccessKey() throws Exception {
+    void testGetUserByAccessKey() throws Exception {
         GetUserByAccessKeyRequestDTO getUserByAccessKeyRequestDTO = GetUserByAccessKeyRequestDTO.builder()
                 .accessKey(TEST_ACCESS_KEY)
                 .build();
@@ -78,7 +78,7 @@ public class GetUserByAccessKeyServiceTest {
     }
 
     @Test
-    public void testGetUserByAccessKeyWithInvalidRequest(){
+    void testGetUserByAccessKeyWithInvalidRequest(){
         GetUserByAccessKeyRequestDTO getUserByAccessKeyRequestDTO = GetUserByAccessKeyRequestDTO.builder()
                 .accessKey("")
                 .build();

@@ -28,7 +28,7 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class UpdateAccountAttributesServiceTest {
+class UpdateAccountAttributesServiceTest {
 
     // mock vault client
     protected static AmazonHttpClient updateAccountAttributesAmazonHttpClient;
@@ -97,7 +97,7 @@ public class UpdateAccountAttributesServiceTest {
     }
 
     @Test
-    public void testUpdateAccountAttributes() throws Exception {
+    void testUpdateAccountAttributes() throws Exception {
 
         CreateAccountResponseDTO response = updateAccountAttributesMockClient.updateAccountAttributes(updateAccountAttributesRequestDTO).getAwsResponse();
 
@@ -111,7 +111,7 @@ public class UpdateAccountAttributesServiceTest {
     }
 
     @Test
-    public void testUpdateAccountAttributesWithCredentials() throws Exception {
+    void testUpdateAccountAttributesWithCredentials() throws Exception {
 
         accountServicesClient = new AccountServicesClient(updateAccountAttributesAmazonHttpClient, basicAWSCredentials);
         CreateAccountResponseDTO response = accountServicesClient.updateAccountAttributes(updateAccountAttributesRequestDTO).getAwsResponse();
@@ -126,7 +126,7 @@ public class UpdateAccountAttributesServiceTest {
     }
 
     @Test
-    public void testUpdateAccountAttributesWithoutCustomAttributes() throws Exception {
+    void testUpdateAccountAttributesWithoutCustomAttributes() throws Exception {
 
 
         UpdateAccountAttributesRequestDTO updateAccountAttributesRequestDTO1 = UpdateAccountAttributesRequestDTO.builder()
@@ -139,7 +139,7 @@ public class UpdateAccountAttributesServiceTest {
     }
 
     @Test
-    public void testUpdateAccountAttributesRequestWithNullName(){
+    void testUpdateAccountAttributesRequestWithNullName(){
 
         assertThrows(NullPointerException.class, () -> {
             UpdateAccountAttributesRequestDTO.builder()
@@ -150,7 +150,7 @@ public class UpdateAccountAttributesServiceTest {
     }
 
     @Test
-    public void testUpdateAccountAttributesError400() throws Exception {
+    void testUpdateAccountAttributesError400() throws Exception {
 
         when(updateAccountAttributesAmazonHttpClient.execute(any(Request.class), any(), any(), any(),any()))
                 .thenAnswer(new Answer<Response>() {
@@ -182,7 +182,7 @@ public class UpdateAccountAttributesServiceTest {
     @Disabled
     @Test
     @SuppressWarnings( "deprecation" )
-    public void testUpdateAccountAttributesWithActualVault() {
+    void testUpdateAccountAttributesWithActualVault() {
         //"D4IT2AWSB588GO5J9T00": "UEEu8tYlsOGGrgf4DAiSZD6apVNPUWqRiPG0nTB6"
         AccountServicesClient amazonIdentityManagementClient = new AccountServicesClient(
                 new BasicAWSCredentials("D4IT2AWSB588GO5J9T00", "UEEu8tYlsOGGrgf4DAiSZD6apVNPUWqRiPG0nTB6"));

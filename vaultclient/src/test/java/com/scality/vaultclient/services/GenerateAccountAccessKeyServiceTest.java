@@ -27,7 +27,7 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class GenerateAccountAccessKeyServiceTest {
+class GenerateAccountAccessKeyServiceTest {
 
     // mock vault client
     protected static AmazonHttpClient generateAccountAccessKeyAmazonHttpClient;
@@ -93,7 +93,7 @@ public class GenerateAccountAccessKeyServiceTest {
     }
 
     @Test
-    public void testGenerateAccountAccessKey() {
+    void testGenerateAccountAccessKey() {
 
         GenerateAccountAccessKeyResponse response = generateAccountAccessKeyMockClient.generateAccountAccessKey(generateAccountAccessKeyRequest).getAwsResponse();
 
@@ -109,7 +109,7 @@ public class GenerateAccountAccessKeyServiceTest {
     }
 
     @Test
-    public void testGenerateAccountAccessKeyWithCredentials() {
+    void testGenerateAccountAccessKeyWithCredentials() {
 
         accountServicesClient = new AccountServicesClient(generateAccountAccessKeyAmazonHttpClient, basicAWSCredentials);
         GenerateAccountAccessKeyResponse response = accountServicesClient.generateAccountAccessKey(generateAccountAccessKeyRequest).getAwsResponse();
@@ -126,7 +126,7 @@ public class GenerateAccountAccessKeyServiceTest {
     }
 
     @Test
-    public void testGenerateAccountAccessKeyWithDurationSeconds() {
+    void testGenerateAccountAccessKeyWithDurationSeconds() {
 
         GenerateAccountAccessKeyRequest GenerateAccountAccessKeyRequest1 = GenerateAccountAccessKeyRequest.builder()
                                                                             .accountName(DEFAULT_ACCOUNT_NAME)
@@ -148,7 +148,7 @@ public class GenerateAccountAccessKeyServiceTest {
     }
 
     @Test
-    public void testGenerateAccountAccessKeyWithExtKeys() throws Exception {
+    void testGenerateAccountAccessKeyWithExtKeys() throws Exception {
         GenerateAccountAccessKeyRequest GenerateAccountAccessKeyRequest2 = GenerateAccountAccessKeyRequest.builder()
                                                                             .accountName(DEFAULT_ACCOUNT_NAME)
                                                                             .externalAccessKey(TEST_ACCESS_KEY1)
@@ -168,7 +168,7 @@ public class GenerateAccountAccessKeyServiceTest {
     }
 
     @Test
-    public void testGenerateAccountAccessKeyRequestWithNullAccountName(){
+    void testGenerateAccountAccessKeyRequestWithNullAccountName(){
 
         assertThrows(NullPointerException.class, () -> {
             GenerateAccountAccessKeyRequest.builder()
@@ -178,7 +178,7 @@ public class GenerateAccountAccessKeyServiceTest {
     }
 
     @Test
-    public void testListAccountsWithInvalidDuration(){
+    void testListAccountsWithInvalidDuration(){
         GenerateAccountAccessKeyRequest GenerateAccountAccessKeyRequest1 = GenerateAccountAccessKeyRequest.builder()
                 .accountName(DEFAULT_ACCOUNT_NAME)
                 .durationSeconds(TEST_ACCESS_KEY_DURATION_SECONDS_ERR)
@@ -189,7 +189,7 @@ public class GenerateAccountAccessKeyServiceTest {
     }
 
     @Test
-    public void testGenerateAccountAccessKeyError400() throws Exception {
+    void testGenerateAccountAccessKeyError400() throws Exception {
 
         when(generateAccountAccessKeyAmazonHttpClient.execute(any(Request.class), any(), any(), any(),any()))
                 .thenAnswer(new Answer<Response>() {
@@ -221,7 +221,7 @@ public class GenerateAccountAccessKeyServiceTest {
     @Disabled
     @Test
     @SuppressWarnings( "deprecation" )
-    public void testGenerateAccountAccessKeyWithActualVault() {
+    void testGenerateAccountAccessKeyWithActualVault() {
         //"D4IT2AWSB588GO5J9T00": "UEEu8tYlsOGGrgf4DAiSZD6apVNPUWqRiPG0nTB6"
         AccountServicesClient amazonIdentityManagementClient = new AccountServicesClient(
                 new BasicAWSCredentials("D4IT2AWSB588GO5J9T00", "UEEu8tYlsOGGrgf4DAiSZD6apVNPUWqRiPG0nTB6"));
