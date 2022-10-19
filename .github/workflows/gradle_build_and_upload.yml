@@ -35,15 +35,15 @@ jobs:
           gradle-version: 7.3
 
       - name: Execute build with Gradle wrapper
-        run: ./gradlew build
+        run: ./gradlew build -PsonatypeUsername=$NEXUS_UNAME -PsonatypePassword=$NEXUS_PWD
 
       - name: Get archive upload signing key
         run: echo "$SIGNING_KEY" | base64 --decode > $GITHUB_WORKSPACE/secring.gpg
 
       - name: Gradle Upload Archives to Snapshot Repository
         if: ${{ !inputs.release }}
-        run: ./gradlew publishVaultClientPublicationToNexusSnapshotsRepository -Psigning.secretKeyRingFile=$GITHUB_WORKSPACE/secring.gpg -PnexusSnapshotsUsername=$NEXUS_UNAME -PnexusSnapshotsPassword=$NEXUS_PWD -Psigning.keyId=$SIGNING_KEYID -Psigning.password=$SIGNING_PWD
+        run: ./gradlew publishSonatypePublicationToNexusSnapshotsRepository -PsonatypeUsername=$NEXUS_UNAME -PsonatypePassword=$NEXUS_PWD -Psigning.secretKeyRingFile=$GITHUB_WORKSPACE/secring.gpg -Psigning.keyId=$SIGNING_KEYID -Psigning.password=$SIGNING_PWD
 
       - name: Gradle Upload Archives to Releases Repository
         if: ${{ inputs.release }}
-        run: ./gradlew publishVaultClientPublicationToNexusReleaseRepository -Prelease -Psigning.secretKeyRingFile=$GITHUB_WORKSPACE/secring.gpg -PnexusReleaseUsername=$NEXUS_UNAME -PnexusReleasePassword=$NEXUS_PWD -Psigning.keyId=$SIGNING_KEYID -Psigning.password=$SIGNING_PWD
+        run: ./gradlew publishSonatypePublicationToSonatypeRepository closeAndReleaseSonatypeStagingRepository -Prelease -PsonatypeUsername=$NEXUS_UNAME -PsonatypePassword=$NEXUS_PWD -Psigning.secretKeyRingFile=$GITHUB_WORKSPACE/secring.gpg -Psigning.keyId=$SIGNING_KEYID -Psigning.password=$SIGNING_PWD
