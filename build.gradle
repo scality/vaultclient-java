@@ -41,7 +41,7 @@ allprojects {
 
     configurations {
         group 'com.scality'
-        version '0.6.0'
+        version '0.5.1'
         if (!project.hasProperty('release')) {
             project.setVersion(project.getVersion() + '-SNAPSHOT')
         }
