@@ -1,61 +1,70 @@
 buildscript {
     repositories {
-        jcenter()
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
     }
     dependencies {
-        classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
+        classpath 'com.github.spotbugs.snom:spotbugs-gradle-plugin:5.0.12'
+        classpath 'gradle.plugin.com.github.ksoichiro:gradle-console-reporter:0.6.3'
+        classpath 'io.github.gradle-nexus:publish-plugin:1.1.0'
     }
 }
 
 plugins {
     id 'java'
-    id 'maven-publish'
     id 'pmd'
-    id "com.github.spotbugs" version "4.6.0"
-    id 'com.github.ksoichiro.console.reporter' version '0.6.2'
+    id 'com.github.spotbugs' version '5.0.12'
+    id 'com.github.ksoichiro.console.reporter' version '0.6.3' // jacoco report (code coverage)
+    id 'io.github.gradle-nexus.publish-plugin' version '1.1.0' // gradle nexus publish-plugin
 }
 
-description = 'vaultclient-java'
-sourceCompatibility = '1.8'
+sourceCompatibility = JavaVersion.VERSION_17
 
 dependencies {
     implementation project('vaultclient')
 }
+
+apply plugin: 'io.github.gradle-nexus.publish-plugin'
+
 allprojects {
     apply plugin: 'java'
     apply plugin: 'maven-publish'
+    apply plugin: 'signing'
 
+    apply from: "$rootDir/upload-artifact.gradle"
     apply from: "$rootDir/spotbugs.gradle"
     apply from: "$rootDir/pmd.gradle"
     apply from: "$rootDir/jacoco.gradle"
-    apply from: "$rootDir/upload-artifact.gradle"
 
     repositories {
         mavenLocal()
         mavenCentral()
-        jcenter()
-        maven {
-            url = 'https://repo.maven.apache.org/maven2'
-        }
+
     }
 
     configurations {
         group 'com.scality'
-        version '0.6.0'
+        version '1.0.0'
         if (!project.hasProperty('release')) {
             project.setVersion(project.getVersion() + '-SNAPSHOT')
         }
     }
+
+    test {
+        useJUnitPlatform()
+    }
 }
 
-repositories {
-    mavenCentral()
+nexusPublishing {
+    repositories {
+        sonatype {
+            username = sonatypeUsername
+            password = sonatypePassword
+        }
+    }
 }
 
-test {
-    useJUnitPlatform()
-}
 
-jar {
-    enabled = true
-}
+
+

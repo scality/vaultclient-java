@@ -31,7 +31,7 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class ListAccountsServiceTest {
+class ListAccountsServiceTest {
 
     // mock vault client
     protected static AmazonHttpClient listAccountAmazonHttpClient;
@@ -135,7 +135,7 @@ public class ListAccountsServiceTest {
 
     /** List Accounts Test cases **/
     @Test
-    public void testListAccounts() throws Exception {
+    void testListAccounts() throws Exception {
 
         ListAccountsResponseDTO response = listAccountsMockClient.listAccounts(defaultListAccountsRequestDTO).getAwsResponse();
 
@@ -148,7 +148,7 @@ public class ListAccountsServiceTest {
     }
 
     @Test
-    public void testListAccountsWithCredentials() throws Exception {
+    void testListAccountsWithCredentials() throws Exception {
 
         accountServicesClient = new AccountServicesClient(listAccountAmazonHttpClient, basicAWSCredentials);
         ListAccountsResponseDTO response = accountServicesClient.listAccounts(defaultListAccountsRequestDTO).getAwsResponse();
@@ -163,7 +163,7 @@ public class ListAccountsServiceTest {
     }
 
     @Test
-    public void testListAccountsWithMarker() throws Exception {
+    void testListAccountsWithMarker() throws Exception {
 
         ListAccountsRequestDTO listAccountsRequestDTO = ListAccountsRequestDTO.builder()
                 .marker(DEFAULT_ACCOUNT_ID + TEST_LIST_ACCOUNTS_MARKER_VAL)
@@ -176,7 +176,7 @@ public class ListAccountsServiceTest {
     }
 
     @Test
-    public void testListAccountsWithMaxItems() throws Exception {
+    void testListAccountsWithMaxItems() throws Exception {
 
         ListAccountsRequestDTO listAccountsRequestDTO = ListAccountsRequestDTO.builder()
                 .maxItems(TEST_LIST_ACCOUNTS_COUNT)
@@ -188,7 +188,7 @@ public class ListAccountsServiceTest {
     }
 
     @Test
-    public void testListAccountsWithMaxItemsAndMarker() throws Exception {
+    void testListAccountsWithMaxItemsAndMarker() throws Exception {
 
         ListAccountsRequestDTO listAccountsRequestDTO = ListAccountsRequestDTO.builder()
                 .marker(DEFAULT_ACCOUNT_ID + TEST_LIST_ACCOUNTS_MARKER_VAL)
@@ -202,7 +202,7 @@ public class ListAccountsServiceTest {
     }
 
     @Test
-    public void testListAccountsWithFilterKey() throws Exception {
+    void testListAccountsWithFilterKey() throws Exception {
 
         String customAttributeKey = customAttributes.keySet().iterator().next();
         ListAccountsRequestDTO listAccountsRequestDTO = ListAccountsRequestDTO.builder()
@@ -217,7 +217,7 @@ public class ListAccountsServiceTest {
     }
 
     @Test
-    public void testListAccountsWithFilterKeyStartsWith() throws Exception {
+    void testListAccountsWithFilterKeyStartsWith() throws Exception {
 
         ListAccountsRequestDTO listAccountsRequestDTO = ListAccountsRequestDTO.builder()
                 .filterKeyStartsWith("cd_tenant_id")
@@ -230,7 +230,7 @@ public class ListAccountsServiceTest {
     }
 
     @Test
-    public void testListAccountsWithInvalidMaxItems(){
+    void testListAccountsWithInvalidMaxItems(){
         ListAccountsRequestDTO listAccountsRequestDTO = ListAccountsRequestDTO.builder()
                 .maxItems(TEST_LIST_ACCOUNTS_COUNT_2)
                 .build();
@@ -241,7 +241,7 @@ public class ListAccountsServiceTest {
     }
 
     @Test
-    public void testListAccountsWithNonNullEmptyMarker(){
+    void testListAccountsWithNonNullEmptyMarker(){
         ListAccountsRequestDTO listAccountsRequestDTO = ListAccountsRequestDTO.builder()
                 .marker("")
                 .build();
@@ -252,7 +252,7 @@ public class ListAccountsServiceTest {
     }
 
     @Test
-    public void testListAccountsFilterKeyAndFilterKeyStartsW(){
+    void testListAccountsFilterKeyAndFilterKeyStartsW(){
         ListAccountsRequestDTO listAccountsRequestDTO = ListAccountsRequestDTO.builder()
                 .filterKey(customAttributes.keySet().iterator().next())
                 .filterKeyStartsWith("cd_tenant_id")
@@ -267,7 +267,7 @@ public class ListAccountsServiceTest {
     @Disabled
     @Test
     @SuppressWarnings( "deprecation" )
-    public void testListAccountsWithActualVault() {
+    void testListAccountsWithActualVault() {
         // These are default vault admin keys. Ref: https://github.com/scality/Vault/blob/development/7.10/tests/utils/admincredentials.json
         AccountServicesClient amazonIdentityManagementClient = new AccountServicesClient(
                 new BasicAWSCredentials(DEFAULT_VAULT_ADMIN_AK, DEFAULT_VAULT_ADMIN_SK));

@@ -10,6 +10,7 @@ import org.mockito.stubbing.Answer;
 
 import java.io.ByteArrayInputStream;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -52,7 +53,7 @@ class CreateAccountResponseJsonUnmarshallerTest {
                     @Override
                     public HttpResponse answer(InvocationOnMock invocation) {
                         HttpResponse httpsResponse = new HttpResponse(null, null);
-                        httpsResponse.setContent(new ByteArrayInputStream(new Gson().toJson(expectedResult).getBytes(Charset.forName("UTF-8"))));
+                        httpsResponse.setContent(new ByteArrayInputStream(new Gson().toJson(expectedResult).getBytes(StandardCharsets.UTF_8)));
                         return httpsResponse;
                     }
                 });
