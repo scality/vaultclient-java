@@ -99,30 +99,30 @@ class UpdateAccountAttributesServiceTest {
     @Test
     void testUpdateAccountAttributes() throws Exception {
 
-        CreateAccountResponseDTO response = updateAccountAttributesMockClient.updateAccountAttributes(updateAccountAttributesRequestDTO).getAwsResponse();
+        AccountData response = updateAccountAttributesMockClient.updateAccountAttributes(updateAccountAttributesRequestDTO).getAwsResponse();
 
-        assertEquals(DEFAULT_EMAIL_ADDR, response.getAccount().getData().getEmailAddress(), ERR_EMAIL_ADDR_INVALID);
-        assertEquals(DEFAULT_ACCOUNT_NAME, response.getAccount().getData().getName(), ERR_NAME_INVALID);
-        assertNotNull(response.getAccount().getData().getArn(), ERR_ARN_NULL);
-        assertNotNull(response.getAccount().getData().getCreateDate(), ERR_CREATE_DATE_NULL);
-        assertNotNull(response.getAccount().getData().getId(), ERR_ID_NULL);
-        assertNotNull(response.getAccount().getData().getCanonicalId(), ERR_CANONICAL_ID_NULL);
-        assertNotNull(response.getAccount().getData().getCustomAttributes(), ERR_CUSTOM_ATTRIBUTES_NULL);
+        assertEquals(DEFAULT_EMAIL_ADDR, response.getEmailAddress(), ERR_EMAIL_ADDR_INVALID);
+        assertEquals(DEFAULT_ACCOUNT_NAME, response.getName(), ERR_NAME_INVALID);
+        assertNotNull(response.getArn(), ERR_ARN_NULL);
+        assertNotNull(response.getCreateDate(), ERR_CREATE_DATE_NULL);
+        assertNotNull(response.getId(), ERR_ID_NULL);
+        assertNotNull(response.getCanonicalId(), ERR_CANONICAL_ID_NULL);
+        assertNotNull(response.getCustomAttributes(), ERR_CUSTOM_ATTRIBUTES_NULL);
     }
 
     @Test
     void testUpdateAccountAttributesWithCredentials() throws Exception {
 
         accountServicesClient = new AccountServicesClient(updateAccountAttributesAmazonHttpClient, basicAWSCredentials);
-        CreateAccountResponseDTO response = accountServicesClient.updateAccountAttributes(updateAccountAttributesRequestDTO).getAwsResponse();
+        AccountData response = accountServicesClient.updateAccountAttributes(updateAccountAttributesRequestDTO).getAwsResponse();
 
-        assertEquals(DEFAULT_EMAIL_ADDR, response.getAccount().getData().getEmailAddress(), ERR_EMAIL_ADDR_INVALID);
-        assertEquals(DEFAULT_ACCOUNT_NAME, response.getAccount().getData().getName(), ERR_NAME_INVALID);
-        assertNotNull(response.getAccount().getData().getArn(), ERR_ARN_NULL);
-        assertNotNull(response.getAccount().getData().getCreateDate(), ERR_CREATE_DATE_NULL);
-        assertNotNull(response.getAccount().getData().getId(), ERR_ID_NULL);
-        assertNotNull(response.getAccount().getData().getCanonicalId(), ERR_CANONICAL_ID_NULL);
-        assertNotNull(response.getAccount().getData().getCustomAttributes(), ERR_CUSTOM_ATTRIBUTES_NULL);
+        assertEquals(DEFAULT_EMAIL_ADDR, response.getEmailAddress(), ERR_EMAIL_ADDR_INVALID);
+        assertEquals(DEFAULT_ACCOUNT_NAME, response.getName(), ERR_NAME_INVALID);
+        assertNotNull(response.getArn(), ERR_ARN_NULL);
+        assertNotNull(response.getCreateDate(), ERR_CREATE_DATE_NULL);
+        assertNotNull(response.getId(), ERR_ID_NULL);
+        assertNotNull(response.getCanonicalId(), ERR_CANONICAL_ID_NULL);
+        assertNotNull(response.getCustomAttributes(), ERR_CUSTOM_ATTRIBUTES_NULL);
     }
 
     @Test
@@ -198,14 +198,14 @@ class UpdateAccountAttributesServiceTest {
                 .accountName(name)
                 .customAttributes(customAttributes)
                 .build();
-        CreateAccountResponseDTO response = amazonIdentityManagementClient.updateAccountAttributes(updateAccountAttributesRequestDTOs).getAwsResponse();
-        assertEquals(email_address, response.getAccount().getData().getEmailAddress(), ERR_EMAIL_ADDR_INVALID);
-        assertEquals(name, response.getAccount().getData().getName(), ERR_NAME_INVALID);
-        assertNotNull(response.getAccount().getData().getArn(), ERR_ARN_NULL);
-        assertNotNull(response.getAccount().getData().getCreateDate(), ERR_CREATE_DATE_NULL);
-        assertNotNull(response.getAccount().getData().getId(), ERR_ID_NULL);
-        assertNotNull(response.getAccount().getData().getCanonicalId(), ERR_CANONICAL_ID_NULL);
-        assertNotNull(response.getAccount().getData().getCustomAttributes(), ERR_CUSTOM_ATTRIBUTES_NULL);
+        AccountData response = amazonIdentityManagementClient.updateAccountAttributes(updateAccountAttributesRequestDTOs).getAwsResponse();
+        assertEquals(email_address, response.getEmailAddress(), ERR_EMAIL_ADDR_INVALID);
+        assertEquals(name, response.getName(), ERR_NAME_INVALID);
+        assertNotNull(response.getArn(), ERR_ARN_NULL);
+        assertNotNull(response.getCreateDate(), ERR_CREATE_DATE_NULL);
+        assertNotNull(response.getId(), ERR_ID_NULL);
+        assertNotNull(response.getCanonicalId(), ERR_CANONICAL_ID_NULL);
+        assertNotNull(response.getCustomAttributes(), ERR_CUSTOM_ATTRIBUTES_NULL);
     }
 
 }
