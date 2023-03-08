@@ -62,7 +62,7 @@ class UpdateAccountAttributesServiceTest {
     private static void initUpdateAccountAttributesMocks() {
 
         updateAccountAttributesRequestDTO = UpdateAccountAttributesRequestDTO.builder()
-                .name(DEFAULT_ACCOUNT_NAME)
+                .accountName(DEFAULT_ACCOUNT_NAME)
                 .customAttributes(customAttributes)
                 .build();
 
@@ -78,8 +78,8 @@ class UpdateAccountAttributesServiceTest {
                         UpdateAccountAttributesRequestDTO request = (UpdateAccountAttributesRequestDTO) ogReq.getOriginalRequest();
                         AccountData data = new AccountData();
                         data.setEmailAddress(DEFAULT_EMAIL_ADDR);
-                        data.setName(request.getName());
-                        data.setArn(DEFAULT_ARN_STR + request.getName() +"/\"");
+                        data.setName(request.getAccountName());
+                        data.setArn(DEFAULT_ARN_STR + request.getAccountName() +"/\"");
                         data.setCreateDate(new Date());
                         data.setId(DEFAULT_ACCOUNT_ID);
                         data.setCanonicalId(DEFAULT_CANONICAL_ID);
@@ -130,7 +130,7 @@ class UpdateAccountAttributesServiceTest {
 
 
         UpdateAccountAttributesRequestDTO updateAccountAttributesRequestDTO1 = UpdateAccountAttributesRequestDTO.builder()
-                .name(DEFAULT_ACCOUNT_NAME)
+                .accountName(DEFAULT_ACCOUNT_NAME)
                 .build();
 
         assertThrows(SdkClientException.class, () -> {
@@ -143,7 +143,7 @@ class UpdateAccountAttributesServiceTest {
 
         assertThrows(NullPointerException.class, () -> {
             UpdateAccountAttributesRequestDTO.builder()
-                    .name(null)
+                    .accountName(null)
                     .customAttributes(customAttributes)
                     .build();
         }, "Expected NullPointerException");
@@ -195,7 +195,7 @@ class UpdateAccountAttributesServiceTest {
         customAttributes.put("cd_tenant_id%3D%3Dccf2139b-7435-426b-b4d2-b917392d9540", "");
         customAttributes.put("cd_tenant_id%3D%3D27598f0b-3696-4d04-81f3-76f89b032d7d", "");
         UpdateAccountAttributesRequestDTO updateAccountAttributesRequestDTOs = UpdateAccountAttributesRequestDTO.builder()
-                .name(name)
+                .accountName(name)
                 .customAttributes(customAttributes)
                 .build();
         CreateAccountResponseDTO response = amazonIdentityManagementClient.updateAccountAttributes(updateAccountAttributesRequestDTOs).getAwsResponse();

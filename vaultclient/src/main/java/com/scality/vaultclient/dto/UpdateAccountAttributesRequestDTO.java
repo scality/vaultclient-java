@@ -22,7 +22,7 @@ public class UpdateAccountAttributesRequestDTO extends com.amazonaws.AmazonWebSe
     private static final long serialVersionUID = 1L;
 
     @NonNull
-    private String name;
+    private String accountName;
 
     private Map<String, String> customAttributes;
 

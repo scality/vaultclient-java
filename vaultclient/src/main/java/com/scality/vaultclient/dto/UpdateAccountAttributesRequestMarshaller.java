@@ -13,8 +13,8 @@ import com.scality.vaultclient.services.VaultClientException;
  */
 public class UpdateAccountAttributesRequestMarshaller extends GenericRequestMarshaller<UpdateAccountAttributesRequestDTO>{
 
-    private static final MarshallingInfo<String> NAME_BINDING = MarshallingInfo.builder(MarshallingType.STRING).marshallLocation(MarshallLocation.PAYLOAD)
-            .marshallLocationName("name").build();
+    private static final MarshallingInfo<String> ACCOUNT_NAME_BINDING = MarshallingInfo.builder(MarshallingType.STRING).marshallLocation(MarshallLocation.PAYLOAD)
+            .marshallLocationName("accountName").build();
     private static final MarshallingInfo<String> CUSTOM_ATTRIBUTES_BINDING = MarshallingInfo.builder(MarshallingType.JSON_VALUE).marshallLocation(MarshallLocation.PAYLOAD)
             .marshallLocationName("customAttributes").build();
     private static final String UPDATE_ACCOUNT_ATTRIBUTES_ACTION = "UpdateAccountAttributes";
@@ -36,12 +36,12 @@ public class UpdateAccountAttributesRequestMarshaller extends GenericRequestMars
 
         super.marshall(updateAccountAttributesRequestDTO, protocolMarshaller, UPDATE_ACCOUNT_ATTRIBUTES_ACTION);
 
-        if (StringUtils.isNullOrEmpty(updateAccountAttributesRequestDTO.getName())) {
+        if (StringUtils.isNullOrEmpty(updateAccountAttributesRequestDTO.getAccountName())) {
             throw new VaultClientException("accountName is required.");
         }
 
         try {
-            protocolMarshaller.marshall(updateAccountAttributesRequestDTO.getName(), NAME_BINDING);
+            protocolMarshaller.marshall(updateAccountAttributesRequestDTO.getAccountName(), ACCOUNT_NAME_BINDING);
 
             if (updateAccountAttributesRequestDTO.getCustomAttributes()!=null
                     && !updateAccountAttributesRequestDTO.getCustomAttributes().isEmpty()) {
