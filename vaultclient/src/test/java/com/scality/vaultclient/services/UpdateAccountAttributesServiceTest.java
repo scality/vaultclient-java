@@ -139,6 +139,17 @@ class UpdateAccountAttributesServiceTest {
     }
 
     @Test
+    void testUpdateAccountAttributesRequestWithEmptyCustomAttribute(){
+        UpdateAccountAttributesRequestDTO updateAccountAttributesRequestDTO2 = UpdateAccountAttributesRequestDTO.builder()
+                .name(DEFAULT_ACCOUNT_NAME)
+                .customAttributes(new HashMap<>())
+                .build();
+
+        CreateAccountResponseDTO response = updateAccountAttributesMockClient.updateAccountAttributes(updateAccountAttributesRequestDTO2).getAwsResponse();
+        assertNotNull(response.getAccount().getData().getCustomAttributes(), ERR_CUSTOM_ATTRIBUTES_NULL);
+    }
+
+    @Test
     void testUpdateAccountAttributesRequestWithNullName(){
 
         assertThrows(NullPointerException.class, () -> {
