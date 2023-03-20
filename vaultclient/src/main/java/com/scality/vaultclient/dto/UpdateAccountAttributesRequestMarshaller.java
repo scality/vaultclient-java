@@ -21,6 +21,11 @@ public class UpdateAccountAttributesRequestMarshaller extends GenericRequestMars
 
     private static final UpdateAccountAttributesRequestMarshaller instance = new UpdateAccountAttributesRequestMarshaller();
 
+    /**
+     * static factory method that returns a singleton instance of the UpdateAccountAttributesRequestMarshaller class.
+     *
+     * @return instance of UpdateAccountAttributesRequestMarshaller
+     */
     public static UpdateAccountAttributesRequestMarshaller getInstance() {
         return instance;
     }
