@@ -2,6 +2,9 @@ package com.scality.vaultclient.services;
 
 import com.amazonaws.AmazonServiceException;
 
+/**
+ * Represents an error interacting with the Vault system.
+ */
 public class VaultClientException extends AmazonServiceException {
 
     private static final long serialVersionUID = 1L;

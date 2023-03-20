@@ -92,10 +92,22 @@ public abstract class BaseServicesClient extends AmazonWebServiceClient{
         this(new AWSStaticCredentialsProvider(awsCredentials));
     }
 
+    /**
+     * Constructs a new client to invoke service methods on IAM using the specified AWS account credentials provider.
+     * @param awsCredentialsProvider the aws credentials provider
+     */
     public BaseServicesClient(AWSCredentialsProvider awsCredentialsProvider) {
         this(awsCredentialsProvider, configFactory.getConfig());
     }
 
+    /**
+     * Client for accessing IAM. All service calls made using this client are blocking, and will not return until the
+     * service call completes.
+     *
+     * @param awsCredentials The AWS credentials (access key ID and secret key) to use when authenticating with AWS
+     *       services.
+     * @param clientConfiguration The client configuration options controlling how this client connects to IAM
+     */
     public BaseServicesClient(AWSCredentials awsCredentials, ClientConfiguration clientConfiguration) {
         this(new AWSStaticCredentialsProvider(awsCredentials), clientConfiguration);
     }
@@ -118,6 +130,16 @@ public abstract class BaseServicesClient extends AmazonWebServiceClient{
         this(awsCredentialsProvider, clientConfiguration, null);
     }
 
+    /**
+     * Constructs a new client to invoke service methods on IAM using the specified AWS account credentials provider and
+     * client configuration options.
+     *
+     * @param awsCredentialsProvider The AWS credentials provider which will provide credentials to authenticate requests
+     *        with AWS services.
+     * @param clientConfiguration The client configuration options controlling how this client connects to IAM (ex:
+     *       proxy settings, retry counts, etc.).
+     * @param requestMetricCollector optional request metric collector
+     */
     public BaseServicesClient(AWSCredentialsProvider awsCredentialsProvider, ClientConfiguration clientConfiguration,
                               RequestMetricCollector requestMetricCollector) {
         super(clientConfiguration, requestMetricCollector);
@@ -200,24 +222,49 @@ public abstract class BaseServicesClient extends AmazonWebServiceClient{
      */
     protected final List<Unmarshaller<AmazonServiceException, Node>> exceptionUnmarshallers = new ArrayList<Unmarshaller<AmazonServiceException, Node>>();
 
+    /**
+     * Gets the AWS credentials provider.
+     *
+     * @return the AWS credentials provider.
+     */
     public AWSCredentialsProvider getAwsCredentialsProvider() {
         return awsCredentialsProvider;
     }
 
+    /**
+     * Sets the AWS credentials provider.
+     *
+     * @param awsCredentialsProvider the AWS credentials provider.
+     */
     @Generated
     public void setAwsCredentialsProvider(AWSCredentialsProvider awsCredentialsProvider) {
         this.awsCredentialsProvider = awsCredentialsProvider;
     }
 
+    /**
+     * Returns the advanced configuration options.
+     *
+     * @return the advanced configuration options.
+     */
     public AdvancedConfig getAdvancedConfig() {
         return advancedConfig;
     }
 
+    /**
+     * Sets the advanced configuration options.
+     *
+     * @param advancedConfig the advanced configuration options.
+     */
     @Generated
     public void setAdvancedConfig(AdvancedConfig advancedConfig) {
         this.advancedConfig = advancedConfig;
     }
 
+    /**
+     * Returns the list of exception unmarshallers.
+     *
+     * @return the list of exception unmarshallers.
+     */
     public List<Unmarshaller<AmazonServiceException, Node>> getExceptionUnmarshallers() {
         return exceptionUnmarshallers;
     }

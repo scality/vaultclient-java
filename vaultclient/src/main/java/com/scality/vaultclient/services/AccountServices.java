@@ -3,6 +3,9 @@ package com.scality.vaultclient.services;
 import com.amazonaws.Response;
 import com.scality.vaultclient.dto.*;
 
+/**
+ * Account Services.
+ */
 public interface AccountServices {
     /**
      * Create an account.
