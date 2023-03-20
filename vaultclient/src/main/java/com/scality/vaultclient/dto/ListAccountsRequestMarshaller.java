@@ -27,6 +27,11 @@ public class ListAccountsRequestMarshaller extends GenericRequestMarshaller<List
 
     private static final ListAccountsRequestMarshaller instance = new ListAccountsRequestMarshaller();
 
+    /**
+     * static factory method that returns a singleton instance of the ListAccountsRequestMarshaller class.
+     *
+     * @return instance of ListAccountsRequestMarshaller
+     */
     public static ListAccountsRequestMarshaller getInstance() {
         return instance;
     }

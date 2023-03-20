@@ -27,6 +27,11 @@ public class CreateAccountRequestMarshaller extends GenericRequestMarshaller<Cre
 
     private static final CreateAccountRequestMarshaller instance = new CreateAccountRequestMarshaller();
 
+    /**
+     * static factory method that returns a singleton instance of the CreateAccountRequestMarshaller class.
+     *
+     * @return instance of CreateAccountRequestMarshaller
+     */
     public static CreateAccountRequestMarshaller getInstance() {
         return instance;
     }
