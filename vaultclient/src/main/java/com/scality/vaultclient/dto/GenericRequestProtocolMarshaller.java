@@ -22,6 +22,18 @@ public class GenericRequestProtocolMarshaller<T> implements Marshaller<Request<T
 
     private final GenericRequestMarshaller<T> requestMarshaller;
 
+    /**
+     * This class implements the Marshaller interface and is responsible for marshalling an object of type T
+     * into an AWS request using the SdkJsonProtocolFactory. It uses the GenericRequestMarshaller to marshall the input
+     * object into a payload that can be transmitted over the network. This class also creates an OperationInfo object
+     * that specifies the operation details, such as the httpMethodName, requestUri, hasExplicitPayloadMember, hasPayloadMembers,
+     * and serviceName.
+     *
+     * This class is designed to be used with the AWS SDK for Java to create a request that can be sent to an AWS service.
+     *
+     * @param protocolFactory an instance of SdkJsonProtocolFactory
+     * @param requestMarshaller an instance of GenericRequestMarshaller
+     */
     public GenericRequestProtocolMarshaller(SdkJsonProtocolFactory protocolFactory, GenericRequestMarshaller requestMarshaller) {
         this.protocolFactory = protocolFactory;
         this.requestMarshaller = requestMarshaller;
@@ -52,6 +64,11 @@ public class GenericRequestProtocolMarshaller<T> implements Marshaller<Request<T
         }
     }
 
+    /**
+     * Getter for protocolFactory
+     *
+     * @return Returns the protocolFactory
+     */
     public SdkJsonProtocolFactory getProtocolFactory() {
         return protocolFactory;
     }

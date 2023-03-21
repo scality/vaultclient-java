@@ -66,6 +66,14 @@ public class AccountServicesClient extends BaseServicesClient implements Account
         super(awsCredentials);
     }
 
+    /**
+     * Constructs a new client to invoke service methods on IAM using the specified AWS account credentials.
+     *
+     * @param awsCredentials The AWS account credentials
+     * @param clientConfiguration The client configuration options controlling how this client connects to
+     * IAM (ex: proxy settings, retry counts, etc.).  If this argument is null, the default client
+     * configuration will be used.
+     */
     public AccountServicesClient(AWSCredentials awsCredentials, ClientConfiguration clientConfiguration) {
         super(awsCredentials, clientConfiguration);
     }

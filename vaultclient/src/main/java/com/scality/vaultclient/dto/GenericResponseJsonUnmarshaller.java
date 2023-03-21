@@ -13,6 +13,11 @@ import com.scality.vaultclient.services.VaultClientException;
 public class GenericResponseJsonUnmarshaller<T> implements Unmarshaller<T, JsonUnmarshallerContext> {
     final Class<T> typeParameterClass;
 
+    /**
+     * Constructor
+     *
+     * @param typeParameterClass the class of the response object
+     */
     public GenericResponseJsonUnmarshaller(Class<T> typeParameterClass) {
         this.typeParameterClass = typeParameterClass;
     }

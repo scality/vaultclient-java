@@ -18,6 +18,11 @@ import java.util.Date;
 public class GenericAWSResponseJsonUnmarshaller<T> implements Unmarshaller<T, JsonUnmarshallerContext> {
     final Class<T> typeParameterClass;
 
+    /**
+     * Constructor
+     *
+     * @param typeParameterClass the class of the response object
+     */
     public GenericAWSResponseJsonUnmarshaller(Class<T> typeParameterClass) {
         this.typeParameterClass = typeParameterClass;
     }

@@ -18,6 +18,11 @@ public class GetUserByAccessKeyRequestMarshaller extends GenericRequestMarshalle
 
     private static final GetUserByAccessKeyRequestMarshaller instance = new GetUserByAccessKeyRequestMarshaller();
 
+    /**
+     * static factory method that returns a singleton instance of the CreateAccountRequestMarshaller class.
+     *
+     * @return instance of CreateAccountRequestMarshaller
+     */
     public static GetUserByAccessKeyRequestMarshaller getInstance() {
         return instance;
     }

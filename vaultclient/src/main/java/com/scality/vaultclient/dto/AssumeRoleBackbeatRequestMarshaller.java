@@ -33,6 +33,11 @@ public class AssumeRoleBackbeatRequestMarshaller extends GenericRequestMarshalle
 
     private static final AssumeRoleBackbeatRequestMarshaller instance = new AssumeRoleBackbeatRequestMarshaller();
 
+    /**
+     * static factory method to get the instance of AssumeRoleBackbeatRequestMarshaller
+     *
+     * @return the instance of AssumeRoleBackbeatRequestMarshaller
+     */
     public static AssumeRoleBackbeatRequestMarshaller getInstance() {
         return instance;
     }
