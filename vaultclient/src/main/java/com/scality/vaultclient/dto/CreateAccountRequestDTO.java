@@ -55,7 +55,7 @@ public class CreateAccountRequestDTO extends com.amazonaws.AmazonWebServiceReque
     /**
      * Account quota in bytes.
      */
-    private int quotaMax;
+    private long quotaMax;
 
     /**
      * Account custom attributes Map.

@@ -41,10 +41,10 @@ public class AccountData implements Serializable {
     String id;
 
     /** The maximum storage quota for the account in bytes. */
-    int quotaMax;
+    long quotaMax;
 
     /** The current storage quota usage for the account in bytes. */
-    int quota; // This will show up only in list accounts response
+    long quota; // This will show up only in list accounts response
 
     /** The date when the account was created. */
     Date createDate;
