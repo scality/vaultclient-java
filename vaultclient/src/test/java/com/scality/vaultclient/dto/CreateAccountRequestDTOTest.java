@@ -9,6 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import static com.scality.vaultclient.utils.VaultServicesTestConstants.*;
+
 //@SuppressWarnings("ConstantConditions")
 class CreateAccountRequestDTOTest {
 
@@ -31,7 +33,7 @@ class CreateAccountRequestDTOTest {
         CreateAccountRequestDTO createAccountRequestDTO = CreateAccountRequestDTO.builder()
                 .emailAddress(email_address)
                 .name(name)
-                .quotaMax(10)
+                .quotaMax(DEFAULT_QUOTA_MAX)
                 .externalAccountId(DEFAULT_ACCOUNT_ID)
                 .customAttributes(customAttributes)
                 .build();
@@ -39,7 +41,7 @@ class CreateAccountRequestDTOTest {
 
         assertEquals(email_address, createAccountRequestDTO.getEmailAddress(),"Invalid Email address");
         assertEquals(name, createAccountRequestDTO.getName(), "Invalid Name");
-        assertEquals(10, createAccountRequestDTO.getQuotaMax(), "Invalid quota" );
+        assertEquals(DEFAULT_QUOTA_MAX, createAccountRequestDTO.getQuotaMax(), "Invalid quota" );
         assertEquals(DEFAULT_ACCOUNT_ID, createAccountRequestDTO.getExternalAccountId(), "Invalid ExternalAccountId");
         assertEquals(customAttributes, createAccountRequestDTO.getCustomAttributes(), "Invalid Custom Attributes Map");
         assertNotNull(createAccountRequestDTO.toString());
@@ -55,7 +57,7 @@ class CreateAccountRequestDTOTest {
             CreateAccountRequestDTO.builder()
                     .emailAddress(email_address)
                     .name(name)
-                    .quotaMax(10)
+                    .quotaMax(DEFAULT_QUOTA_MAX)
                     .build();
         }, "Expected a NullPointerException");
     }
@@ -70,7 +72,7 @@ class CreateAccountRequestDTOTest {
             CreateAccountRequestDTO requestDTO = new CreateAccountRequestDTO();
             requestDTO.setName(name);
             requestDTO.setExternalAccountId("");
-            requestDTO.setQuotaMax(10);
+            requestDTO.setQuotaMax(DEFAULT_QUOTA_MAX);
             requestDTO.setEmailAddress(email_address);
         }, "Expected a NullPointerException");
     }

@@ -12,6 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.mock;
 
+import static com.scality.vaultclient.utils.VaultServicesTestConstants.*;
+
 class AccountDataTest {
 
     private AccountData accountDataUnderTest;
@@ -26,7 +28,7 @@ class AccountDataTest {
         accountDataUnderTest.name = "name";
         accountDataUnderTest.emailAddress = "emailAddress";
         accountDataUnderTest.id = "id";
-        accountDataUnderTest.quotaMax = 0;
+        accountDataUnderTest.quotaMax = DEFAULT_QUOTA_MAX;
         accountDataUnderTest.createDate = DATE;
         accountDataUnderTest.canonicalId = "canonicalId";
     }
@@ -41,7 +43,7 @@ class AccountDataTest {
         data.setCreateDate(DATE);
         data.setId("id");
         data.setCanonicalId("canonicalId");
-        data.setQuotaMax(0);
+        data.setQuotaMax(DEFAULT_QUOTA_MAX);
         // Run the test
         assertEquals(accountDataUnderTest,data);
         assertEquals(accountDataUnderTest.hashCode(), data.hashCode());

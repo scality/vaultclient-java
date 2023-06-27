@@ -138,7 +138,7 @@ class CreateAccountServiceTest {
         CreateAccountRequestDTO createAccountRequestDTO1 = CreateAccountRequestDTO.builder()
                 .emailAddress(DEFAULT_EMAIL_ADDR)
                 .name(DEFAULT_ACCOUNT_NAME)
-                .quotaMax(10)
+                .quotaMax(DEFAULT_QUOTA_MAX)
                 .build();
 
         CreateAccountResponseDTO response = accountServicesClient.createAccount(createAccountRequestDTO1).getAwsResponse();
@@ -159,7 +159,7 @@ class CreateAccountServiceTest {
                 .emailAddress(DEFAULT_EMAIL_ADDR)
                 .name(DEFAULT_ACCOUNT_NAME)
                 .customAttributes(customAttributes)
-                .quotaMax(10)
+                .quotaMax(DEFAULT_QUOTA_MAX)
                 .build();
 
         CreateAccountResponseDTO response = createAccountMockClient.createAccount(createAccountRequestDTO1).getAwsResponse();
@@ -171,7 +171,7 @@ class CreateAccountServiceTest {
         assertNotNull(response.getAccount().getData().getId(), ERR_ID_NULL);
         assertNotNull(response.getAccount().getData().getCanonicalId(), ERR_CANONICAL_ID_NULL);
         assertNotNull(response.getAccount().getData().getCustomAttributes(), ERR_CUSTOM_ATTRIBUTES_NULL);
-        assertEquals(10, response.getAccount().getData().getQuotaMax(), "Invalid QuotaMax" );
+        assertEquals(DEFAULT_QUOTA_MAX, response.getAccount().getData().getQuotaMax(), "Invalid QuotaMax" );
     }
 
     @Test

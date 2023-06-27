@@ -17,8 +17,10 @@ public class CreateAccountRequestMarshaller extends GenericRequestMarshaller<Cre
             .marshallLocationName("name").build();
     private static final MarshallingInfo<String> EMAILADDRESS_BINDING = MarshallingInfo.builder(MarshallingType.STRING).marshallLocation(MarshallLocation.PAYLOAD)
             .marshallLocationName("emailAddress").build();
-    private static final MarshallingInfo<Integer> QUOTAMAX_BINDING = MarshallingInfo.builder(MarshallingType.INTEGER).marshallLocation(MarshallLocation.PAYLOAD)
+    private static final MarshallingInfo<Long> QUOTAMAX_BINDING = MarshallingInfo.builder(MarshallingType.LONG)
+            .marshallLocation(MarshallLocation.PAYLOAD)
             .marshallLocationName("quotaMax").build();
+
     private static final MarshallingInfo<String> EXTERNALACCOUNTID_BINDING = MarshallingInfo.builder(MarshallingType.STRING).marshallLocation(MarshallLocation.PAYLOAD)
             .marshallLocationName("externalAccountId").build();
     private static final MarshallingInfo<String> CUSTOM_ATTRIBUTES_BINDING = MarshallingInfo.builder(MarshallingType.JSON_VALUE).marshallLocation(MarshallLocation.PAYLOAD)
