@@ -9,6 +9,7 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 import java.io.ByteArrayInputStream;
+import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -39,7 +40,7 @@ class CreateAccountResponseJsonUnmarshallerTest {
         data.setName("name");
         data.setEmailAddress("emailAddress");
         data.setId("id");
-        data.setQuotaMax(100);
+        data.setQuotaMax(BigInteger.valueOf(100));
         data.setCreateDate(new GregorianCalendar(2019, Calendar.JANUARY, 1).getTime());
         data.setCanonicalId("canonicalId");
         data.setAliasList(Arrays.asList("value"));

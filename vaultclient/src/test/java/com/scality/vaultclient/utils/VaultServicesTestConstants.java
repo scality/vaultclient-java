@@ -1,5 +1,7 @@
 package com.scality.vaultclient.utils;
 
+import java.math.BigInteger;
+
 public final class VaultServicesTestConstants {
 
     public static final String DEFAULT_ACCOUNT_ID = "123123123123";
@@ -48,5 +50,5 @@ public final class VaultServicesTestConstants {
     public static final String DEFAULT_VAULT_ADMIN_AK = "D4IT2AWSB588GO5J9T00";
     public static final String DEFAULT_VAULT_ADMIN_SK = "UEEu8tYlsOGGrgf4DAiSZD6apVNPUWqRiPG0nTB6";
 
-    public static final Long DEFAULT_QUOTA_MAX = 13194139533312L;
+    public static final BigInteger DEFAULT_QUOTA_MAX = new BigInteger("13194139533312L");
 }

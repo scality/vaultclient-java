@@ -3,6 +3,7 @@ package com.scality.vaultclient.dto;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -41,7 +42,7 @@ public class AccountData implements Serializable {
     String id;
 
     /** The maximum storage quota for the account in bytes. */
-    long quotaMax;
+    BigInteger quotaMax;
 
     /** The current storage quota usage for the account in bytes. */
     long quota; // This will show up only in list accounts response

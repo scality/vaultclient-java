@@ -8,6 +8,8 @@ import com.amazonaws.util.StringUtils;
 import com.google.gson.Gson;
 import com.scality.vaultclient.services.VaultClientException;
 
+import java.math.BigInteger;
+
 /**
  * The type Create account request marshaller extends GenericRequestMarshaller to marshall Create Account Requests.
  */
@@ -17,7 +19,7 @@ public class CreateAccountRequestMarshaller extends GenericRequestMarshaller<Cre
             .marshallLocationName("name").build();
     private static final MarshallingInfo<String> EMAILADDRESS_BINDING = MarshallingInfo.builder(MarshallingType.STRING).marshallLocation(MarshallLocation.PAYLOAD)
             .marshallLocationName("emailAddress").build();
-    private static final MarshallingInfo<Long> QUOTAMAX_BINDING = MarshallingInfo.builder(MarshallingType.LONG)
+    private static final MarshallingInfo<String> QUOTAMAX_BINDING = MarshallingInfo.builder(MarshallingType.STRING)
             .marshallLocation(MarshallLocation.PAYLOAD)
             .marshallLocationName("quotaMax").build();
 
@@ -61,10 +63,12 @@ public class CreateAccountRequestMarshaller extends GenericRequestMarshaller<Cre
             protocolMarshaller.marshall(createAccountRequestDTO.getName(), NAME_BINDING);
             protocolMarshaller.marshall(createAccountRequestDTO.getEmailAddress(), EMAILADDRESS_BINDING);
 
-            if (createAccountRequestDTO.getQuotaMax() < 0) {
-                throw new VaultClientException("Quota must be a non-negative number.");
-            } else if (createAccountRequestDTO.getQuotaMax() > 0) {
-                protocolMarshaller.marshall(createAccountRequestDTO.getQuotaMax(), QUOTAMAX_BINDING);
+            if (createAccountRequestDTO.getQuotaMax() != null) {
+                if (createAccountRequestDTO.getQuotaMax().compareTo(BigInteger.ZERO) < 0) {
+                    throw new VaultClientException("Quota must be a non-negative number.");
+                } else if (createAccountRequestDTO.getQuotaMax().compareTo(BigInteger.ZERO) > 0) {
+                    protocolMarshaller.marshall(createAccountRequestDTO.getQuotaMax().toString(), QUOTAMAX_BINDING);
+                }
             }
 
             if (createAccountRequestDTO.getExternalAccountId()!=null) {

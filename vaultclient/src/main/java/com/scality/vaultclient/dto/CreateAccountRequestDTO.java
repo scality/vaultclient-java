@@ -9,6 +9,7 @@ import lombok.ToString;
 import lombok.NonNull;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Map;
 
 /**
@@ -55,7 +56,7 @@ public class CreateAccountRequestDTO extends com.amazonaws.AmazonWebServiceReque
     /**
      * Account quota in bytes.
      */
-    private long quotaMax;
+    private BigInteger quotaMax;
 
     /**
      * Account custom attributes Map.
